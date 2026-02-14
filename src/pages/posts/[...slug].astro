@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../components/layout/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title} description={post.data.summary}>
+  <article class="prose prose-invert max-w-none prose-headings:text-slate-100 prose-p:text-slate-200">
+    <a href="/" class="text-sm">← Back to posts</a>
+    <h1>{post.data.title}</h1>
+    <p class="text-sm text-slate-400">{post.data.date.toLocaleDateString()}</p>
+    <Content />
+  </article>
+</Layout>
