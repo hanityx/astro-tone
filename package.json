@@ -1,21 +1,75 @@
 {
-  "name": "astro-tech-blog-template",
-  "version": "0.1.0",
-  "private": true,
+  "name": "astro-tone",
+  "description": "Typography-first Astro blog starter with quiet design, built-in search, and publishing defaults.",
   "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "author": "hanityx",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanityx/astro-tone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hanityx/astro-tone/issues"
+  },
+  "homepage": "https://github.com/hanityx/astro-tone#readme",
+  "keywords": [
+    "astro",
+    "withastro",
+    "astro-theme",
+    "astro-starter",
+    "blog",
+    "markdown",
+    "mdx",
+    "pagefind",
+    "typography"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "type-check": "astro check"
+    "astro": "astro",
+    "check": "astro check",
+    "format": "prettier --write \"src/**/*.{astro,ts,css,md,mdx}\"",
+    "lint": "eslint \"src/**/*.{ts,astro}\"",
+    "lint:css": "stylelint \"src/**/*.{css,astro}\""
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.0",
-    "@astrojs/mdx": "^3.0.0",
-    "@astrojs/rss": "^4.0.0",
-    "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.15.0",
-    "tailwindcss": "^3.4.0",
-    "typescript": "^5.5.0"
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.3.1",
+    "astro-expressive-code": "^0.42.0",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "sharp": "^0.34.3",
+    "toc-rail": "^0.1.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "eslint-plugin-astro": "^1.7.0",
+    "pagefind": "^1.5.2",
+    "postcss-html": "^1.8.1",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "stylelint": "^17.11.0",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3"
+  },
+  "overrides": {
+    "@typescript-eslint/scope-manager": "8.46.3",
+    "@typescript-eslint/types": "8.46.3",
+    "@typescript-eslint/visitor-keys": "8.46.3",
+    "yaml-language-server": {
+      "yaml": "2.8.4"
+    }
   }
 }
