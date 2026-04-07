@@ -1,0 +1,26 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "selector-class-pattern": null,
+    "custom-property-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "alpha-value-notation": null,
+    "color-function-notation": null,
+    "color-function-alias-notation": null,
+    "color-hex-length": null,
+    "media-feature-range-notation": null,
+    "property-no-vendor-prefix": null,
+    "rule-empty-line-before": null,
+    "custom-property-pattern": "^(?:[a-z][a-z0-9]*(?:-[a-z0-9]+)*|ec-codePad(?:Blk|Inl))$",
+    "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global"] }],
+    "value-keyword-case": null
+  },
+  "overrides": [
+    {
+      "files": ["**/*.astro"],
+      "customSyntax": "postcss-html"
+    }
+  ],
+  "ignoreFiles": ["dist/**", "node_modules/**", ".astro/**"]
+}
