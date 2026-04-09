@@ -1,0 +1,165 @@
+/* ------------------------------------------------------------
+   8. ACCESSIBILITY
+   ------------------------------------------------------------ */
+
+/* Skip-to-content link hidden off-screen until focus. */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 9999;
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-blue);
+  color: #fff;
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  text-decoration: none;
+  transition: top 150ms ease-out;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Focus ring for keyboard navigation. */
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* Hide outline for non-keyboard focus. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ------------------------------------------------------------
+   9. RESET & BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--label-primary);
+  background-color: var(--bg-primary);
+  margin: 0;
+  padding: 0;
+  overflow-wrap: break-word;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+/* ------------------------------------------------------------
+   9. TYPOGRAPHY
+   ------------------------------------------------------------ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 var(--space-4) 0;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--label-primary);
+}
+
+h1 {
+  font-size: var(--text-large-title);
+}
+h2 {
+  font-size: var(--text-title-1);
+}
+h3 {
+  font-size: var(--text-title-2);
+}
+h4 {
+  font-size: var(--text-title-3);
+  font-weight: var(--weight-semibold);
+}
+h5 {
+  font-size: var(--text-headline);
+  font-weight: var(--weight-semibold);
+}
+h6 {
+  font-size: var(--text-callout);
+  font-weight: var(--weight-semibold);
+}
+
+p {
+  margin: 0 0 var(--space-4) 0;
+  color: var(--label-primary);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+strong,
+b {
+  font-weight: var(--weight-semibold);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--text-footnote);
+}
+
+/* ------------------------------------------------------------
+   10. COMPONENT PRIMITIVES
+   ------------------------------------------------------------ */
+.eyebrow-accent {
+  font-size: var(--text-caption-1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+}
+
+/* ------------------------------------------------------------
+   11. LAYOUT
+   ------------------------------------------------------------ */
+main {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+/* ------------------------------------------------------------
+   12. MEDIA
+   ------------------------------------------------------------ */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}

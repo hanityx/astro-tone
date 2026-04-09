@@ -1,0 +1,51 @@
+/* ------------------------------------------------------------
+   14. INTERACTIVE ELEMENTS
+   ------------------------------------------------------------ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-callout);
+}
+
+th {
+  font-weight: var(--weight-semibold);
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--separator-opaque);
+  color: var(--label-secondary);
+  font-size: var(--text-footnote);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--separator);
+}
+
+blockquote {
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-6);
+  border-left: 3px solid var(--color-blue);
+  background-color: var(--fill-quaternary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: var(--text-callout);
+  color: var(--label-secondary);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--separator);
+  margin: var(--space-8) 0;
+}
+
+textarea,
+input,
+select {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+}
