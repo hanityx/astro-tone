@@ -1,0 +1,237 @@
+/* ============================================================
+   Tone Design Tokens — Global Tokens & Base Styles
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. TYPOGRAPHY
+   ------------------------------------------------------------ */
+:root {
+  /* Font Families */
+  --font-sans: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+
+  /* Type Scale */
+  --text-large-title: 2.125rem;
+  --text-title-1: 1.75rem;
+  --text-title-2: 1.375rem;
+  --text-title-3: 1.25rem;
+  --text-headline: 1.0625rem;
+  --text-body: 1.0625rem;
+  --text-callout: 1rem;
+  --text-subheadline: 0.9375rem;
+  --text-footnote: 0.8125rem;
+  --text-caption-1: 0.75rem;
+  --text-caption-2: 0.6875rem;
+
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.022em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+
+  /* ------------------------------------------------------------
+     2. COLOR
+     ------------------------------------------------------------ */
+
+  /* Brand and state colors */
+  --color-accent: #197ca8;
+  --color-success: #34c759;
+  --color-warning: #ff9500;
+
+  /* Backward-compatible aliases for existing component styles. */
+  --color-blue: var(--color-accent);
+  --color-green: var(--color-success);
+  --color-orange: var(--color-warning);
+
+  /* Label Colors */
+  --label-primary: rgba(0, 0, 0, 1);
+  --label-secondary: rgba(24, 31, 36, 0.72);
+  --label-tertiary: rgba(24, 31, 36, 0.62);
+  --label-quaternary: rgba(24, 31, 36, 0.34);
+
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7fbfd;
+  --bg-tertiary: #ffffff;
+
+  /* Grouped Backgrounds */
+  --bg-grouped-primary: #f7fbfd;
+  --bg-grouped-secondary: #ffffff;
+  --bg-grouped-tertiary: #f7fbfd;
+
+  /* Fill Colors */
+  --fill-primary: rgba(25, 124, 168, 0.14);
+  --fill-secondary: rgba(25, 124, 168, 0.1);
+  --fill-tertiary: rgba(25, 124, 168, 0.07);
+  --fill-quaternary: rgba(25, 124, 168, 0.05);
+
+  /* Separator */
+  --separator: rgba(60, 60, 67, 0.29);
+  --separator-opaque: #c6c6c8;
+
+  /* Link */
+  --color-link: var(--color-blue);
+
+  /* ------------------------------------------------------------
+     3. SPACING — 4pt base grid
+     ------------------------------------------------------------ */
+  --space-1: 0.25rem; /* 4pt */
+  --space-2: 0.5rem; /* 8pt */
+  --space-3: 0.75rem; /* 12pt */
+  --space-4: 1rem; /* 16pt */
+  --space-5: 1.25rem; /* 20pt */
+  --space-6: 1.5rem; /* 24pt */
+  --space-8: 2rem; /* 32pt */
+  --space-10: 2.5rem; /* 40pt */
+  --space-12: 3rem; /* 48pt */
+  --space-16: 4rem; /* 64pt */
+  --space-20: 5rem; /* 80pt */
+  --space-24: 6rem; /* 96pt */
+
+  /* ------------------------------------------------------------
+     4. BORDER RADIUS
+     ------------------------------------------------------------ */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-full: 9999px;
+
+  /* Frosted glass button */
+  --btn-glass-bg: rgba(0, 0, 0, 0.06);
+  --btn-glass-border: rgba(0, 0, 0, 0.1);
+  --btn-glass-color: var(--label-primary);
+
+  /* ------------------------------------------------------------
+     5. SHADOWS — Subtle, layered
+     ------------------------------------------------------------ */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg:
+    0 4px 16px rgba(0, 0, 0, 0.08), 0 8px 32px rgba(0, 0, 0, 0.1), 0 16px 48px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.1), 0 24px 64px rgba(0, 0, 0, 0.12);
+
+  /* ------------------------------------------------------------
+     6. MOTION
+     ------------------------------------------------------------ */
+  --ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  /* ------------------------------------------------------------
+     7. LAYOUT
+     ------------------------------------------------------------ */
+  --max-width-content: 720px;
+  --max-width-wide: 880px;
+  --nav-height: 52px;
+}
+
+/* Dark Mode — media query OR data-theme attribute (JS toggle) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --label-primary: rgba(255, 255, 255, 1);
+    --label-secondary: rgba(239, 247, 250, 0.76);
+    --label-tertiary: rgba(239, 247, 250, 0.56);
+    --label-quaternary: rgba(239, 247, 250, 0.38);
+
+    --bg-primary: #000000;
+    --bg-secondary: #101416;
+    --bg-tertiary: #151b1e;
+
+    --bg-grouped-primary: #000000;
+    --bg-grouped-secondary: #101416;
+    --bg-grouped-tertiary: #151b1e;
+
+    --fill-primary: rgba(116, 199, 220, 0.18);
+    --fill-secondary: rgba(116, 199, 220, 0.13);
+    --fill-tertiary: rgba(116, 199, 220, 0.09);
+    --fill-quaternary: rgba(116, 199, 220, 0.06);
+
+    --separator: rgba(84, 84, 88, 0.65);
+    --separator-opaque: #38383a;
+
+    --color-accent: #74c7dc;
+    --color-success: #30d158;
+    --color-warning: #ff9f0a;
+    --color-blue: var(--color-accent);
+    --color-green: var(--color-success);
+    --color-orange: var(--color-warning);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg:
+      0 4px 16px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.5), 0 24px 64px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Force dark via JS toggle */
+[data-theme='dark'] {
+  --label-primary: rgba(255, 255, 255, 1);
+  --label-secondary: rgba(239, 247, 250, 0.76);
+  --label-tertiary: rgba(239, 247, 250, 0.56);
+  --label-quaternary: rgba(239, 247, 250, 0.38);
+  --bg-primary: #000000;
+  --bg-secondary: #101416;
+  --bg-tertiary: #151b1e;
+  --bg-grouped-primary: #000000;
+  --bg-grouped-secondary: #101416;
+  --bg-grouped-tertiary: #151b1e;
+  --fill-primary: rgba(116, 199, 220, 0.18);
+  --fill-secondary: rgba(116, 199, 220, 0.13);
+  --fill-tertiary: rgba(116, 199, 220, 0.09);
+  --fill-quaternary: rgba(116, 199, 220, 0.06);
+  --separator: rgba(84, 84, 88, 0.65);
+  --separator-opaque: #38383a;
+  --color-accent: #74c7dc;
+  --color-success: #30d158;
+  --color-warning: #ff9f0a;
+  --color-blue: var(--color-accent);
+  --color-green: var(--color-success);
+  --color-orange: var(--color-warning);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg:
+    0 4px 16px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.5), 0 24px 64px rgba(0, 0, 0, 0.6);
+  --btn-glass-bg: rgba(255, 255, 255, 0.09);
+  --btn-glass-border: rgba(255, 255, 255, 0.15);
+  --btn-glass-color: rgba(255, 255, 255, 0.92);
+}
+
+/* Force light via JS toggle */
+[data-theme='light'] {
+  --label-primary: rgba(0, 0, 0, 1);
+  --label-secondary: rgba(24, 31, 36, 0.72);
+  --label-tertiary: rgba(24, 31, 36, 0.62);
+  --label-quaternary: rgba(24, 31, 36, 0.34);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7fbfd;
+  --bg-tertiary: #ffffff;
+  --separator: rgba(60, 60, 67, 0.29);
+  --separator-opaque: #c6c6c8;
+  --color-accent: #197ca8;
+  --color-success: #34c759;
+  --color-warning: #ff9500;
+  --color-blue: var(--color-accent);
+  --color-green: var(--color-success);
+  --color-orange: var(--color-warning);
+}

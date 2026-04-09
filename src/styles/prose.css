@@ -1,0 +1,355 @@
+/* ------------------------------------------------------------
+   14. PROSE (blog content)
+   ------------------------------------------------------------ */
+.prose {
+  --inline-code-bg: color-mix(in srgb, var(--color-blue) 7%, transparent);
+  --inline-code-fg: color-mix(in srgb, var(--label-primary) 88%, var(--color-blue) 12%);
+  --prose-muted: var(--label-secondary);
+  --prose-soft: var(--label-tertiary);
+  --prose-rule: color-mix(in srgb, var(--separator) 72%, transparent);
+  --prose-marker: color-mix(in srgb, var(--color-blue) 70%, var(--label-secondary) 30%);
+  --prose-kbd-bg: color-mix(in srgb, var(--label-primary) 5%, var(--bg-primary));
+  --prose-kbd-border: color-mix(in srgb, var(--label-primary) 16%, transparent);
+  --prose-mark-bg: color-mix(in srgb, var(--color-blue) 22%, transparent);
+  --prose-mark-fg: var(--label-primary);
+
+  font-size: var(--text-body);
+  line-height: 1.76;
+  color: var(--label-primary);
+}
+
+.prose > * {
+  margin-block: 0;
+}
+
+.prose > * + * {
+  margin-block-start: var(--space-6);
+}
+
+.prose p,
+.prose li {
+  line-height: 1.76;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  position: relative;
+  scroll-margin-top: calc(var(--nav-height) + var(--space-6));
+  text-wrap: pretty;
+}
+
+.prose .heading-anchor {
+  position: absolute;
+  right: calc(100% + var(--space-2));
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85em;
+  font-weight: 400;
+  color: var(--label-quaternary);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+  padding: 0 var(--space-1);
+}
+
+.prose h1:hover .heading-anchor,
+.prose h2:hover .heading-anchor,
+.prose h3:hover .heading-anchor,
+.prose h4:hover .heading-anchor,
+.prose h5:hover .heading-anchor,
+.prose h6:hover .heading-anchor {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .prose .heading-anchor {
+    position: static;
+    display: inline-flex;
+    margin-left: var(--space-2);
+    padding: 0;
+    transform: none;
+    vertical-align: baseline;
+    opacity: 0.48;
+  }
+}
+
+.prose h1 {
+  font-size: var(--text-title-1);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: 0;
+  margin-block-start: var(--space-12);
+}
+
+.prose h2 {
+  font-size: var(--text-title-2);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+  margin-block-start: var(--space-12);
+}
+
+.prose h3 {
+  font-size: var(--text-title-3);
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: 0;
+  margin-block-start: var(--space-8);
+}
+
+.prose h4 {
+  font-size: var(--text-headline);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: 0;
+  margin-block-start: var(--space-6);
+}
+
+.prose h5 {
+  font-size: var(--text-callout);
+  font-weight: 600;
+  line-height: 1.32;
+  letter-spacing: 0;
+  margin-block-start: var(--space-6);
+}
+
+.prose h6 {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  margin-block-start: var(--space-5);
+  color: var(--prose-muted);
+}
+
+.prose h1 + *,
+.prose h2 + *,
+.prose h3 + *,
+.prose h4 + *,
+.prose h5 + *,
+.prose h6 + * {
+  margin-block-start: var(--space-3);
+}
+
+.prose h1 + h2,
+.prose h2 + h3,
+.prose h3 + h4,
+.prose h4 + h5,
+.prose h5 + h6 {
+  margin-block-start: var(--space-2);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: var(--space-6);
+}
+
+.prose li {
+  padding-left: var(--space-1);
+}
+
+.prose li + li {
+  margin-block-start: var(--space-2);
+}
+
+.prose li > ul,
+.prose li > ol {
+  margin-block-start: var(--space-2);
+}
+
+.prose li::marker {
+  color: var(--prose-marker);
+}
+
+.prose a {
+  color: var(--color-blue);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--duration-fast) var(--ease-out);
+}
+
+.prose a:hover {
+  text-decoration-color: var(--color-blue);
+  opacity: 1;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--label-primary);
+}
+
+.prose blockquote {
+  padding: var(--space-2) 0 var(--space-2) var(--space-5);
+  border-left: 2px solid var(--color-blue);
+  border-radius: 0;
+  background: transparent;
+  color: var(--label-primary);
+  font-size: var(--text-callout);
+  font-style: normal;
+  line-height: 1.72;
+}
+
+.prose blockquote p:last-child {
+  margin: 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--prose-rule);
+  margin-block: var(--space-12);
+}
+
+.prose img {
+  display: block;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--prose-rule);
+  margin-inline: auto;
+}
+
+.prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  font-size: var(--text-callout);
+  border-collapse: collapse;
+}
+
+.prose th {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--prose-rule);
+  color: var(--prose-muted);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.prose td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--prose-rule);
+  font-size: var(--text-callout);
+}
+
+.prose abbr[title] {
+  cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--prose-soft);
+  text-underline-offset: 0.16em;
+}
+
+.prose kbd {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.55em;
+  padding: 0 0.44em;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  font-weight: 500;
+  color: var(--label-primary);
+  background: var(--prose-kbd-bg);
+  border: 1px solid var(--prose-kbd-border);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 -1px 0 var(--prose-kbd-border);
+}
+
+.prose mark {
+  color: var(--prose-mark-fg);
+  background: linear-gradient(transparent 62%, var(--prose-mark-bg) 0);
+  padding-inline: 0.08em;
+}
+
+.prose sup,
+.prose sub {
+  line-height: 0;
+}
+
+/* Image caption: the <em> immediately after an image. */
+.prose img + em {
+  display: block;
+  margin-block-start: var(--space-2);
+  font-size: var(--text-footnote);
+  font-style: normal;
+  color: var(--prose-soft);
+  text-align: center;
+}
+
+/* Image grid for two images side by side.
+   Usage: <div class="img-grid"> two images </div> */
+.prose .img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+}
+
+.prose .img-grid img {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .prose .img-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Callout boxes.
+   Usage: <div class="callout callout-tip"> ... </div>
+   Types: callout-tip / callout-warning / callout-note */
+.prose .callout {
+  --callout-accent: var(--color-blue);
+  --callout-label: 'Note';
+
+  display: block;
+  padding: var(--space-3) 0 var(--space-3) var(--space-5);
+  border-left: 2px solid var(--callout-accent);
+  border-radius: 0;
+  background: transparent;
+  color: var(--prose-muted);
+  font-size: var(--text-callout);
+  line-height: 1.68;
+}
+
+.prose .callout::before {
+  content: var(--callout-label);
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--callout-accent);
+  font-size: var(--text-caption-2);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.prose .callout > :where(p) {
+  margin: 0;
+}
+
+.prose .callout > :where(p + p) {
+  margin-block-start: var(--space-3);
+}
+
+.prose .callout-tip {
+  --callout-accent: var(--color-success);
+  --callout-label: 'Tip';
+}
+
+.prose .callout-warning {
+  --callout-accent: var(--color-warning);
+  --callout-label: 'Warning';
+}
+
+.prose .callout-note {
+  --callout-accent: var(--color-blue);
+  --callout-label: 'Note';
+}
