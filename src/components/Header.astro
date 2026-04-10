@@ -1,0 +1,80 @@
+---
+import '../styles/components/header.css';
+import config from '../../astro-theme-config';
+import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { withBase } from '../utils/paths';
+
+const skipLinkLabel = 'Skip to content';
+const navAriaLabel = 'Primary navigation';
+const headerTitle = config.site.logoLabel || config.site.title;
+const navItems = config.nav;
+---
+
+<a href="#main-content" class="skip-link">{skipLinkLabel}</a>
+<header class="site-header glass">
+  <nav class="nav-inner" aria-label={navAriaLabel}>
+    <a href={withBase('/')} class="nav-logo">{headerTitle}</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        {navItems.map((item) => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
+      </div>
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    function mountAutoHideHeader() {
+      const header = document.querySelector('.site-header');
+      if (!(header instanceof HTMLElement) || header.dataset.scrollReady === 'true') return;
+      header.dataset.scrollReady = 'true';
+
+      let lastY = window.scrollY;
+      let ticking = false;
+
+      const sync = () => {
+        const currentY = window.scrollY;
+        const delta = currentY - lastY;
+        const activeElement = document.activeElement;
+        const hasKeyboardFocus =
+          activeElement instanceof HTMLElement &&
+            header.contains(activeElement) &&
+            activeElement.matches(':focus-visible');
+
+        header.classList.toggle('is-scrolled', currentY > 8);
+
+        if (currentY < 24 || hasKeyboardFocus) {
+          header.classList.remove('is-hidden');
+        } else if (delta > 8 && currentY > 96) {
+          header.classList.add('is-hidden');
+        } else if (delta < -8) {
+          header.classList.remove('is-hidden');
+        }
+
+        lastY = currentY;
+        ticking = false;
+      };
+
+      sync();
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!ticking) {
+            window.requestAnimationFrame(sync);
+            ticking = true;
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', mountAutoHideHeader, { once: true });
+    } else {
+      mountAutoHideHeader();
+    }
+  })();
+</script>

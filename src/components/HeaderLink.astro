@@ -1,0 +1,23 @@
+---
+import '../styles/components/header-link.css';
+import type { HTMLAttributes } from 'astro/types';
+import { withBase, withoutBase } from '../utils/paths';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, class: className, ...props } = Astro.props;
+const normalizedHref = typeof href === 'string' ? href : '/';
+const pathname = withoutBase(Astro.url.pathname);
+const isActive =
+  pathname === normalizedHref ||
+  pathname.startsWith(normalizedHref === '/' ? '/#' : normalizedHref + '/');
+---
+
+<a
+  href={withBase(normalizedHref)}
+  aria-current={isActive ? 'page' : undefined}
+  class:list={['nav-link', className, { active: isActive }]}
+  {...props}
+>
+  <slot />
+</a>

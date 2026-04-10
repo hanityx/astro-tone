@@ -1,0 +1,100 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  border-bottom: none;
+  background-color: var(--bg-primary);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  transform: translateY(0);
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+  will-change: transform;
+}
+
+.site-header.glass {
+  background-color: var(--bg-primary);
+}
+
+[data-theme='dark'] .site-header.glass,
+:root:not([data-theme='light']) .site-header.glass {
+  background-color: var(--bg-primary);
+}
+
+.site-header.glass.is-scrolled {
+  background-color: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+}
+
+[data-theme='dark'] .site-header.glass.is-scrolled {
+  background-color: color-mix(in srgb, var(--bg-primary) 82%, transparent);
+}
+
+.site-header.is-hidden {
+  transform: translateY(calc(-1 * var(--nav-height)));
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  height: 100%;
+}
+
+.nav-logo {
+  font-size: var(--text-headline);
+  font-weight: var(--weight-semibold);
+  color: var(--label-primary);
+  text-decoration: none;
+  letter-spacing: var(--tracking-tight);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out);
+}
+
+.nav-logo:hover {
+  opacity: 0.7;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+@media (min-width: 960px) {
+  .post-page .nav-right {
+    margin-right: calc(var(--max-width-wide) - var(--max-width-content) - var(--space-12));
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-inner {
+    padding: 0 var(--space-4);
+  }
+
+  .nav-right {
+    gap: var(--space-3);
+    margin-right: 0;
+  }
+
+  .nav-links {
+    gap: var(--space-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
