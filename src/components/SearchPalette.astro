@@ -1,0 +1,51 @@
+---
+import '../styles/components/search-palette.css';
+import { getCollection } from 'astro:content';
+import { withBase } from '../utils/paths';
+import { serializeScriptJson } from '../utils/serialize-script-json';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const items = posts.map((post) => ({
+  title: post.data.title,
+  description: post.data.description,
+  category: post.data.category ?? 'Post',
+  href: withBase(`/blog/${post.id}/`),
+}));
+---
+
+<dialog class="search-palette" data-search-palette aria-label="Search posts">
+  <div class="search-palette-panel">
+    <div class="search-palette-field">
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <path d="m14.2 14.2 3.1 3.1"></path>
+        <circle cx="8.6" cy="8.6" r="5.6"></circle>
+      </svg>
+      <input
+        type="search"
+        data-search-palette-input
+        placeholder="Search posts"
+        autocomplete="off"
+        aria-label="Search posts"
+      />
+      <kbd>Esc</kbd>
+    </div>
+
+    <div class="search-palette-results" data-search-palette-results></div>
+  </div>
+</dialog>
+
+<script
+  is:inline
+  type="application/json"
+  id="search-palette-data"
+  set:html={serializeScriptJson(items)}
+/>
+
+<script>
+  import { mountSearchPaletteTriggers } from '../scripts/search-palette-loader';
+
+  mountSearchPaletteTriggers();
+</script>

@@ -1,0 +1,61 @@
+---
+import type { ImageMetadata } from 'astro';
+import config from '../../astro-theme-config';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import SearchPalette from '../components/SearchPalette.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+  ogImageUrl?: string;
+  type?: 'website' | 'article';
+  pubDate?: string;
+  updatedDate?: string;
+  robots?: string;
+  lang?: string;
+  locale?: string;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  ogImageUrl,
+  type,
+  pubDate,
+  updatedDate,
+  robots,
+  lang,
+  locale,
+  bodyClass,
+} = Astro.props;
+const htmlLang = lang ?? config.site.lang;
+---
+
+<!doctype html>
+<html lang={htmlLang} data-smooth-scroll={config.behavior.smoothScroll ? 'true' : 'false'}>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      ogImageUrl={ogImageUrl}
+      type={type}
+      pubDate={pubDate}
+      updatedDate={updatedDate}
+      robots={robots}
+      locale={locale}
+    />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <Header />
+    <SearchPalette />
+    <slot />
+    <Footer />
+  </body>
+</html>

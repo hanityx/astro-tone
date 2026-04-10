@@ -1,0 +1,60 @@
+---
+import '../styles/components/theme-toggle.css';
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  id="theme-toggle"
+  aria-label="Toggle dark mode"
+  aria-pressed="false"
+  title="Toggle dark mode"
+>
+  <svg
+    class="theme-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    width="19"
+    height="19"
+    viewBox="0 0 20 20"
+    aria-hidden="true"
+  >
+    <circle class="theme-icon-ring" cx="10" cy="10" r="6.75"></circle>
+    <path class="theme-icon-phase" d="M10 3.25a6.75 6.75 0 0 1 0 13.5 3.65 6.75 0 0 0 0-13.5Z"
+    ></path>
+  </svg>
+</button>
+
+<script is:inline>
+  (function () {
+    function mountThemeToggle() {
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      if (!(btn instanceof HTMLButtonElement) || btn.dataset.themeReady === 'true') return;
+      btn.dataset.themeReady = 'true';
+
+      const syncAriaPressed = (dark) => {
+        btn.setAttribute('aria-pressed', String(dark));
+        btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      };
+
+      syncAriaPressed(root.getAttribute('data-theme') === 'dark');
+
+      btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try {
+          localStorage.setItem('theme', next);
+        } catch {
+          // Keep the visible toggle working when storage is unavailable.
+        }
+        syncAriaPressed(next === 'dark');
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', mountThemeToggle, { once: true });
+    } else {
+      mountThemeToggle();
+    }
+  })();
+</script>
