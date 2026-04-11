@@ -1,0 +1,45 @@
+:root[data-sf-effect='scroll-dark'],
+[data-sf-effect='scroll-dark'] html,
+[data-sf-effect='scroll-dark'] body,
+[data-sf-effect='scroll-dark'] header,
+[data-sf-effect='scroll-dark'] main,
+[data-sf-effect='scroll-dark'] article,
+[data-sf-effect='scroll-dark'] footer,
+[data-sf-effect='scroll-dark'] nav {
+  transition:
+    background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms ease-out;
+}
+
+[data-sf-effect='scroll-dark'] .prose,
+[data-sf-effect='scroll-dark'] .prose p,
+[data-sf-effect='scroll-dark'] .prose h1,
+[data-sf-effect='scroll-dark'] .prose h2,
+[data-sf-effect='scroll-dark'] .prose h3,
+[data-sf-effect='scroll-dark'] .prose h4,
+[data-sf-effect='scroll-dark'] .prose li,
+[data-sf-effect='scroll-dark'] .prose a,
+[data-sf-effect='scroll-dark'] .prose blockquote,
+[data-sf-effect='scroll-dark'] .prose code,
+[data-sf-effect='scroll-dark'] .prose pre,
+[data-sf-effect='scroll-dark'] .prose table,
+[data-sf-effect='scroll-dark'] .prose th,
+[data-sf-effect='scroll-dark'] .prose td {
+  transition:
+    background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms ease-out,
+    border-color 220ms ease-out;
+}
+
+[data-sf-effect='scroll-dark'] .post-header,
+[data-sf-effect='scroll-dark'] .post-title,
+[data-sf-effect='scroll-dark'] .post-description,
+[data-sf-effect='scroll-dark'] .post-divider,
+[data-sf-effect='scroll-dark'] .back-link,
+[data-sf-effect='scroll-dark'] .post-meta,
+[data-sf-effect='scroll-dark'] .post-accent {
+  transition:
+    background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms ease-out,
+    border-color 220ms ease-out;
+}

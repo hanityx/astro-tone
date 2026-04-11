@@ -1,0 +1,84 @@
+.lightbox {
+  padding: 0;
+  background: transparent;
+  border: none;
+  max-width: min(92vw, 1200px);
+  max-height: 94vh;
+  border-radius: var(--radius-xl);
+  overflow: visible;
+}
+
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.lightbox[open] {
+  animation: lb-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes lb-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -22px;
+  right: -22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.lightbox-img {
+  display: block;
+  max-width: min(90vw, 1160px);
+  max-height: 86vh;
+  border-radius: var(--radius-lg);
+  object-fit: contain;
+  border: none !important;
+}
+
+.lightbox-caption {
+  font-size: var(--text-footnote);
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  text-align: center;
+  max-width: 60ch;
+}
+
+/* Prose images that open the lightbox. */
+.prose img.is-zoomable {
+  cursor: zoom-in;
+}

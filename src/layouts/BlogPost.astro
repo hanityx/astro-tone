@@ -1,0 +1,128 @@
+---
+import '../styles/layouts/blog-post.css';
+import type { CollectionEntry } from 'astro:content';
+import Comments from '../components/Comments.astro';
+import FeaturedPostGrid from '../components/FeaturedPostGrid.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import ImageLightbox from '../components/ImageLightbox.astro';
+import ScrollFocus from '../components/ScrollFocus.astro';
+import BaseLayout from './BaseLayout.astro';
+import { SITE_AUTHOR, SITE_LANG, SITE_TITLE } from '../consts';
+import { getUiText } from '../ui';
+import { withBase } from '../utils/paths';
+import { serializeScriptJson } from '../utils/serialize-script-json';
+
+type Props = CollectionEntry<'blog'>['data'] & {
+  readingTime?: number;
+  relatedPosts?: CollectionEntry<'blog'>[];
+};
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  readingTime,
+  focusEffect,
+  relatedPosts = [],
+} = Astro.props;
+
+const tr = getUiText();
+const blogBase = withBase('/blog');
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pubDateISO = pubDate.toISOString();
+const updatedDateISO = updatedDate?.toISOString();
+
+const jsonLd = serializeScriptJson({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: pubDateISO,
+  ...(updatedDateISO && { dateModified: updatedDateISO }),
+  url: canonicalURL.href,
+  ...(heroImage && { image: new URL(heroImage.src, Astro.site).href }),
+  author: { '@type': 'Person', name: SITE_AUTHOR },
+  publisher: { '@type': 'Organization', name: SITE_TITLE },
+  inLanguage: SITE_LANG,
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={heroImage}
+  type="article"
+  pubDate={pubDateISO}
+  updatedDate={updatedDateISO}
+  bodyClass="post-page"
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
+  </Fragment>
+
+  {focusEffect && <ScrollFocus variant={focusEffect} />}
+
+  <main id="main-content" class="post-main">
+    <article data-pagefind-body>
+      <a href={blogBase} class="back-link">{tr.backLink}</a>
+
+      <header class="post-header">
+        <div class="post-accent"></div>
+        <div class="post-meta">
+          <FormattedDate class="meta-date" date={pubDate} />
+          {
+            readingTime && (
+              <>
+                <span class="dot">·</span>
+                <span class="meta-item">{tr.readingTime(readingTime)}</span>
+              </>
+            )
+          }
+          {
+            updatedDate && (
+              <>
+                <span class="dot">·</span>
+                <span class="meta-updated">
+                  {tr.updated} <FormattedDate date={updatedDate} />
+                </span>
+              </>
+            )
+          }
+        </div>
+        <h1 class="post-title" data-pagefind-meta="title">{title}</h1>
+        {description && <p class="post-description">{description}</p>}
+      </header>
+
+      <div class="post-divider"></div>
+
+      <div class="prose" id="prose-content">
+        <slot />
+      </div>
+
+      {
+        relatedPosts.length > 0 && (
+          <section class="related-section" data-pagefind-ignore="all">
+            <div class="related-header">
+              <p class="related-label">{tr.relatedPosts}</p>
+              <a href={blogBase} class="related-view-all">
+                {tr.allPosts}
+              </a>
+            </div>
+            <FeaturedPostGrid posts={relatedPosts} variant="related" />
+          </section>
+        )
+      }
+    </article>
+    <Comments />
+  </main>
+  <ImageLightbox />
+
+  <script>
+    import { mountReadingRailLoader } from '../scripts/reading-rail-loader';
+
+    mountReadingRailLoader();
+  </script>
+</BaseLayout>

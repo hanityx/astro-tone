@@ -1,0 +1,57 @@
+---
+import '../styles/components/featured-post-grid.css';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import { withBase } from '../utils/paths';
+
+type BlogPost = CollectionEntry<'blog'>;
+
+type Props = {
+  posts: BlogPost[];
+  basePath?: string;
+  variant?: 'home' | 'related';
+};
+
+const { posts, basePath = '/blog', variant = 'home' } = Astro.props;
+const postSlug = (id: string) => id;
+---
+
+<div class:list={['featured-post-grid', `featured-post-grid--${variant}`]}>
+  {
+    posts.map((post, index) => (
+      <a
+        href={withBase(`${basePath}/${postSlug(post.id)}/`)}
+        class:list={['featured-post-card', `featured-post-card--slot-${index + 1}`]}
+      >
+        <div class="featured-post-card-media">
+          {post.data.heroImage ? (
+            <Image
+              src={post.data.heroImage}
+              alt={post.data.title}
+              class="featured-post-card-img"
+              widths={[320, 480, 700, 960, 1280, 1600]}
+              sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 900px) 32rem, 45vw"
+              quality={88}
+            />
+          ) : (
+            <div class="featured-post-card-placeholder" />
+          )}
+          <div class="featured-post-card-veil" />
+          <div class="featured-post-card-hover">
+            <span class="featured-post-card-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </div>
+        </div>
+        <div class="featured-post-card-body">
+          <p class="featured-post-card-date">
+            <FormattedDate date={post.data.pubDate} />
+          </p>
+          <h3 class="featured-post-card-title">{post.data.title}</h3>
+          {post.data.description && <p class="featured-post-card-desc">{post.data.description}</p>}
+        </div>
+      </a>
+    ))
+  }
+</div>

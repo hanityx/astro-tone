@@ -1,0 +1,49 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import readingTimeLib from 'reading-time';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const allPosts = (await getCollection('blog'))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return allPosts.map((post) => {
+    const slug = post.id;
+    return {
+      params: { slug },
+      props: {
+        post,
+        relatedPosts: allPosts
+          .filter((p) => p.id !== post.id)
+          .sort((a, b) => {
+            const sameCategoryA = a.data.category && a.data.category === post.data.category ? 1 : 0;
+            const sameCategoryB = b.data.category && b.data.category === post.data.category ? 1 : 0;
+            if (sameCategoryA !== sameCategoryB) return sameCategoryB - sameCategoryA;
+            return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+          })
+          .slice(0, 3),
+      },
+    };
+  });
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  relatedPosts: CollectionEntry<'blog'>[];
+}
+
+const { post, relatedPosts } = Astro.props;
+const { Content } = await render(post);
+
+const readingTime = Math.max(1, Math.round(readingTimeLib(post.body ?? '').minutes));
+---
+
+<BlogPost
+  {...post.data}
+  readingTime={readingTime}
+  focusEffect={post.data.focusEffect}
+  relatedPosts={relatedPosts}
+>
+  <Content />
+</BlogPost>

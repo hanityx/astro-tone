@@ -1,0 +1,30 @@
+---
+import '../styles/components/image-lightbox.css';
+// Adds a fullscreen lightbox to images inside .prose.
+// Used from BlogPost.astro via <ImageLightbox />.
+---
+
+<dialog id="lightbox" class="lightbox" aria-label="Image preview">
+  <div class="lightbox-inner">
+    <button type="button" class="lightbox-close" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        ></path>
+      </svg>
+    </button>
+    <img
+      id="lightbox-img"
+      class="lightbox-img"
+      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+      alt=""
+    />
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </div>
+</dialog>
+
+<script>
+  import { onReady } from '../scripts/mount';
+  import { mountImageLightbox } from '../scripts/image-lightbox';
+
+  onReady(mountImageLightbox);
+</script>
