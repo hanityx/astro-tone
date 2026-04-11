@@ -1,0 +1,18 @@
+---
+import '../styles/components/scroll-focus.css';
+
+interface Props {
+  variant: 'scroll-dark';
+}
+
+const { variant } = Astro.props;
+---
+
+<span data-scroll-focus data-variant={variant} hidden></span>
+
+<script>
+  import { onReady } from '../scripts/mount';
+  import { mountScrollFocus } from '../scripts/scroll-focus';
+
+  onReady(mountScrollFocus);
+</script>

@@ -1,0 +1,178 @@
+@import url('toc-rail/style.css');
+
+.post-main {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: var(--space-20) var(--space-6) var(--space-24);
+}
+
+.back-link,
+.post-header,
+.post-divider,
+.prose {
+  max-width: var(--max-width-content);
+}
+
+/* ── Back link ───────────────────────────── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-footnote);
+  font-weight: 500;
+  color: var(--label-tertiary);
+  text-decoration: none;
+  margin-bottom: var(--space-10);
+  transition: color var(--duration-fast) var(--ease-out);
+  letter-spacing: 0.01em;
+}
+
+.back-link:hover {
+  color: var(--color-blue);
+  opacity: 1;
+}
+
+/* ── Post header ────────────────────────── */
+.post-header {
+  padding-bottom: var(--space-8);
+}
+
+/* Blue accent bar above title */
+.post-accent {
+  width: 32px;
+  height: 3px;
+  background: var(--color-blue);
+  border-radius: 99px;
+  margin-bottom: var(--space-6);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-footnote);
+  color: var(--label-tertiary);
+  margin-bottom: var(--space-5);
+}
+
+.meta-date {
+  font-variant-numeric: tabular-nums;
+}
+
+.dot {
+  color: var(--label-quaternary);
+}
+.meta-updated {
+  color: var(--label-quaternary);
+}
+
+.post-title {
+  font-size: clamp(2.2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  margin: 0 0 var(--space-5);
+  color: var(--label-primary);
+  /* Subtle weight contrast via text-shadow trick */
+  text-shadow: 0 0 0 transparent;
+}
+
+.post-description {
+  font-size: var(--text-callout);
+  color: var(--label-secondary);
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 520px;
+  border-left: 2px solid var(--separator);
+  padding-left: var(--space-4);
+}
+
+/* ── Divider ────────────────────────────── */
+.post-divider {
+  height: 1px;
+  background: var(--separator);
+  margin: var(--space-6) 0 var(--space-10);
+}
+
+/* ── Related posts ──────────────────────── */
+.related-section {
+  max-width: var(--max-width-content);
+  margin-top: var(--space-12);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--separator);
+}
+
+.related-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.related-label {
+  font-size: var(--text-caption-1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label-tertiary);
+  margin: 0;
+}
+
+.related-view-all {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  color: var(--color-blue);
+  text-decoration: none;
+  transition: text-shadow var(--duration-fast) var(--ease-out);
+}
+
+.related-view-all:hover {
+  opacity: 1;
+  text-shadow: 0 0 0.5px currentColor;
+}
+
+/* ── Reading rail ───────────────────────── */
+.toc-rail {
+  --toc-rail-accent: var(--color-blue);
+  --toc-rail-line: rgba(24, 31, 36, 0.14);
+  --toc-rail-muted: var(--label-tertiary);
+  --toc-rail-faint: var(--label-quaternary);
+  --toc-rail-text: var(--label-primary);
+  --toc-rail-title: var(--label-quaternary);
+  --toc-rail-font-family: var(--font-sans);
+  --toc-rail-link-size: var(--text-caption-2);
+  --toc-rail-link-weight: var(--weight-medium);
+  --toc-rail-nav-height: var(--nav-height, 52px);
+  --toc-rail-duration-fast: var(--duration-fast);
+  --toc-rail-ease-out: var(--ease-out);
+  --toc-rail-left: calc(
+    50vw - var(--max-width-wide) / 2 + var(--space-6) + var(--max-width-content) + var(--space-12)
+  );
+  --toc-rail-right: auto;
+  --toc-rail-top: max(calc(var(--nav-height, 52px) + var(--space-16)), 24vh);
+  --toc-rail-width: 160px;
+}
+
+[data-theme='dark'] .toc-rail,
+:root:not([data-theme='light']) .toc-rail {
+  --toc-rail-accent: var(--color-blue);
+  --toc-rail-line: color-mix(in srgb, var(--label-primary) 14%, transparent);
+  --toc-rail-muted: var(--label-tertiary);
+  --toc-rail-faint: var(--label-quaternary);
+  --toc-rail-text: var(--label-primary);
+  --toc-rail-title: var(--label-quaternary);
+}
+
+@supports (color: color-mix(in srgb, black 50%, transparent)) {
+  .toc-rail {
+    --toc-rail-line: color-mix(in srgb, var(--label-primary) 14%, transparent);
+  }
+}
+
+/* ── Mobile ─────────────────────────────── */
+@media (max-width: 600px) {
+  .post-main {
+    padding: var(--space-12) var(--space-4) var(--space-16);
+  }
+}

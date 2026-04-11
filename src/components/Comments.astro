@@ -1,0 +1,62 @@
+---
+import '../styles/components/comments.css';
+import config from '../../astro-theme-config';
+import { withBase, withoutBase } from '../utils/paths';
+
+const comments = config.comments;
+const giscus = {
+  ...comments.giscus,
+  repo: import.meta.env.PUBLIC_GISCUS_REPO || comments.giscus.repo,
+  repoId: import.meta.env.PUBLIC_GISCUS_REPO_ID || comments.giscus.repoId,
+  category: import.meta.env.PUBLIC_GISCUS_CATEGORY || comments.giscus.category,
+  categoryId: import.meta.env.PUBLIC_GISCUS_CATEGORY_ID || comments.giscus.categoryId,
+  reactionsEnabled:
+    import.meta.env.PUBLIC_GISCUS_REACTIONS_ENABLED || comments.giscus.reactionsEnabled,
+};
+const commentsMode = import.meta.env.PUBLIC_GISCUS_MODE || comments.mode;
+const canUseCommentsMode =
+  commentsMode === 'giscus' || commentsMode === 'giscus-custom';
+const canRenderGiscus =
+  canUseCommentsMode &&
+  comments.provider === 'giscus' &&
+  giscus.repo &&
+  giscus.repoId &&
+  giscus.category &&
+  giscus.categoryId;
+const giscusTerm = withoutBase(Astro.url.pathname).replace(/^\/+/, '');
+const giscusMapping = giscus.mapping === 'pathname' ? 'specific' : giscus.mapping;
+---
+
+{
+  canRenderGiscus && (
+    <section class="comments-section" data-pagefind-ignore="all" aria-label="Comments">
+      <p class="comments-label">Comments</p>
+      <div
+        id="giscus-container"
+        class="giscus"
+        data-repo={giscus.repo}
+        data-repo-id={giscus.repoId}
+        data-category={giscus.category}
+        data-category-id={giscus.categoryId}
+        data-mapping={giscusMapping}
+        data-term={giscusTerm}
+        data-strict={giscus.strict}
+        data-reactions-enabled={giscus.reactionsEnabled}
+        data-emit-metadata={giscus.emitMetadata}
+        data-input-position="bottom"
+        data-theme={giscus.theme}
+        data-theme-mode={commentsMode === 'giscus-custom' ? 'custom' : 'default'}
+        data-lang={giscus.lang}
+        data-loading={giscus.loading}
+        data-light-theme-path={withBase(giscus.customLightTheme)}
+        data-dark-theme-path={withBase(giscus.customDarkTheme)}
+      />
+    </section>
+  )
+}
+
+<script>
+  import { mountGiscusComments } from '../scripts/giscus-comments';
+
+  mountGiscusComments();
+</script>

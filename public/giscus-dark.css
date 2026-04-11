@@ -1,0 +1,374 @@
+@import url("https://giscus.app/default.css");
+
+main {
+  --tone-giscus-divider: rgba(239, 247, 250, 0.16);
+  --color-fg-default: #f5f5f7;
+  --color-fg-muted: rgba(239, 247, 250, 0.68);
+  --color-fg-subtle: rgba(239, 247, 250, 0.42);
+  --color-canvas-default: transparent;
+  --color-canvas-overlay: #101416;
+  --color-canvas-inset: #101416;
+  --color-canvas-subtle: transparent;
+  --color-border-default: rgba(84, 84, 88, 0.36);
+  --color-border-muted: rgba(84, 84, 88, 0.22);
+  --color-neutral-muted: rgba(255, 255, 255, 0.08);
+  --color-accent-fg: rgba(239, 247, 250, 0.76);
+  --color-accent-emphasis: rgba(239, 247, 250, 0.76);
+  --color-accent-muted: rgba(255, 255, 255, 0.1);
+  --color-btn-text: rgba(239, 247, 250, 0.7);
+  --color-btn-bg: transparent;
+  --color-btn-border: rgba(84, 84, 88, 0.32);
+  --color-btn-hover-bg: rgba(255, 255, 255, 0.05);
+  --color-btn-hover-border: rgba(84, 84, 88, 0.48);
+  --color-btn-primary-text: #f5f5f7;
+  --color-btn-primary-bg: transparent;
+  --color-btn-primary-border: rgba(84, 84, 88, 0.34);
+  --color-btn-primary-hover-bg: rgba(255, 255, 255, 0.06);
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #9ecbff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #79c0ff;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  color: #f5f5f7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  box-sizing: border-box;
+  padding-bottom: 16px;
+}
+
+main,
+button,
+textarea,
+.btn,
+.gsc-comment-box-write,
+.gsc-comment-box-preview,
+.gsc-reply-box,
+.gsc-comment,
+.gsc-replies,
+.gsc-social-reaction-summary-item,
+.gsc-upvote-button,
+.gsc-reactions-button {
+  transition:
+    background-color 180ms ease-out,
+    border-color 180ms ease-out,
+    color 180ms ease-out !important;
+}
+
+.gsc-header {
+  display: none !important;
+}
+
+.gsc-main,
+.gsc-comments,
+.gsc-comment-box,
+.gsc-comment,
+.gsc-comment > div,
+.gsc-replies,
+.gsc-reply-box {
+  overflow: visible !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.gsc-comments {
+  gap: 0 !important;
+}
+
+.gsc-comment-box {
+  margin-top: 16px !important;
+  margin-bottom: 24px !important;
+  padding: 0 !important;
+}
+
+.gsc-comment-box-tabs {
+  display: flex !important;
+  width: calc(100% - 16px) !important;
+  gap: 6px !important;
+  margin: 0 8px 8px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.gsc-comment-box-tabs > div {
+  display: flex !important;
+  gap: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.gsc-comment-box-tabs button {
+  min-height: 30px !important;
+  padding: 0 !important;
+  color: rgba(239, 247, 250, 0.58) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.gsc-comment-box-tabs button.color-bg-canvas {
+  color: #f5f5f7 !important;
+}
+
+.btn {
+  min-height: 30px !important;
+  padding: 0 12px !important;
+  color: var(--color-btn-text) !important;
+  background: transparent !important;
+  border: 1px solid var(--color-btn-border) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.btn:hover,
+.btn:focus {
+  color: var(--color-fg-default) !important;
+  background: var(--color-btn-hover-bg) !important;
+  border-color: var(--color-btn-hover-border) !important;
+}
+
+.gsc-comment-box-write,
+.gsc-comment-box-preview,
+.gsc-reply-box {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  overflow: visible !important;
+  background: #101416 !important;
+  border: 1px solid rgba(84, 84, 88, 0.32) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.gsc-reply-box {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.gsc-reply-box .gsc-comment-box-write,
+.gsc-reply-box .gsc-comment-box-preview {
+  border: 1px solid rgba(84, 84, 88, 0.22) !important;
+}
+
+.gsc-comment-box-textarea::placeholder,
+.gsc-reply-box textarea::placeholder {
+  color: rgba(239, 247, 250, 0.42) !important;
+  opacity: 1 !important;
+}
+
+.gsc-comment-box-write:focus-within,
+.gsc-reply-box:focus-within {
+  border-color: rgba(84, 84, 88, 0.58) !important;
+}
+
+.gsc-comment-box-textarea,
+.gsc-reply-box textarea {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 84px !important;
+  padding: 10px 12px !important;
+  color: #f5f5f7 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+.gsc-comment-box-md-toolbar,
+.gsc-comment-box-tabs > .gsc-comment-box-md-toolbar,
+.gsc-toolbar-item,
+.gsc-comment-box-textarea-extras {
+  display: none !important;
+}
+
+.gsc-comment-box-bottom {
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: calc(100% - 16px) !important;
+  min-height: 34px !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 8px 8px 0 !important;
+  padding: 0 !important;
+}
+
+.gsc-comment-box-buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  margin-left: auto !important;
+}
+
+.gsc-comment-box-bottom button.link-secondary.text-sm {
+  padding: 0 !important;
+  color: rgba(239, 247, 250, 0.44) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+.gsc-comment {
+  padding: 0 0 18px !important;
+  margin: 0 0 12px !important;
+  border-bottom: 1px solid var(--tone-giscus-divider) !important;
+}
+
+.gsc-comment-header,
+.gsc-comment-content,
+.gsc-comment-footer {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.gsc-comment-author {
+  gap: 10px !important;
+  font-weight: 600 !important;
+}
+
+.color-box-border-info {
+  padding: 1px 6px !important;
+  color: rgba(239, 247, 250, 0.56) !important;
+  background: transparent !important;
+  border: 1px solid rgba(84, 84, 88, 0.3) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+
+.gsc-comment-content {
+  font-size: 15px !important;
+  line-height: 1.62 !important;
+}
+
+.gsc-comment-content pre {
+  background: rgba(255, 255, 255, 0.045) !important;
+  border: 1px solid rgba(84, 84, 88, 0.22) !important;
+  border-radius: 8px !important;
+}
+
+.gsc-comment-content code {
+  border-radius: 5px !important;
+}
+
+.gsc-comment-footer,
+.gsc-comment-reactions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.gsc-comment-footer {
+  margin-bottom: 8px !important;
+}
+
+.gsc-comment-reactions {
+  margin-left: 0 !important;
+}
+
+.gsc-social-reaction-summary-item,
+.gsc-upvote-button,
+.gsc-reactions-button {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  color: rgba(239, 247, 250, 0.66) !important;
+  background: transparent !important;
+  border: 1px solid rgba(84, 84, 88, 0.28) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  line-height: 1 !important;
+}
+
+.gsc-social-reaction-summary-item,
+.gsc-upvote-button {
+  min-width: 58px !important;
+  padding: 0 12px !important;
+}
+
+.gsc-reactions-button {
+  width: 28px !important;
+  min-width: 28px !important;
+  padding: 0 !important;
+}
+
+.gsc-upvote-button svg,
+.gsc-reactions-button svg {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.gsc-upvote-button span,
+.gsc-social-reaction-summary-item span {
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+}
+
+.gsc-social-reaction-summary-item:hover,
+.gsc-upvote-button:hover,
+.gsc-reactions-button:hover {
+  color: rgba(239, 247, 250, 0.66) !important;
+  background: transparent !important;
+  border: 1px solid rgba(84, 84, 88, 0.28) !important;
+  box-shadow: none !important;
+}
+
+.gsc-reactions-popover {
+  background: #101416 !important;
+  border: 1px solid rgba(84, 84, 88, 0.32) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.gsc-replies {
+  margin: 14px 0 0 !important;
+  padding: 14px 0 0 !important;
+  border-top: 1px solid var(--tone-giscus-divider) !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 560px) {
+  .gsc-comment-box-bottom {
+    width: 100% !important;
+    margin: 10px 0 0 !important;
+    gap: 8px !important;
+  }
+
+  .gsc-comment-box-bottom .btn,
+  .gsc-comment-box-bottom button.link-secondary.text-sm {
+    min-height: 34px !important;
+  }
+}
