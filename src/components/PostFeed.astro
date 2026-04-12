@@ -1,0 +1,199 @@
+---
+import '../styles/components/post-feed.css';
+import type { CollectionEntry } from 'astro:content';
+import config from '../../astro-theme-config';
+import { getUiText } from '../ui';
+import { withBase } from '../utils/paths';
+import FormattedDate from './FormattedDate.astro';
+
+type BlogPost = CollectionEntry<'blog'>;
+
+type Props = {
+  posts: BlogPost[];
+  basePath?: string;
+  headingLevel?: 'h2' | 'h3';
+  showFilters?: boolean;
+  showMore?: boolean;
+  initialVisible?: number;
+};
+
+const {
+  posts,
+  basePath = '/blog',
+  headingLevel = 'h2',
+  showFilters = true,
+  showMore = true,
+  initialVisible = 8,
+} = Astro.props;
+
+const labels = getUiText().postFeed;
+
+const postSlug = (id: string) => id;
+const categoryOrder = config.content.categoryOrder;
+const sortByCategoryOrder = (a: string, b: string) => {
+  const aIndex = categoryOrder.indexOf(a);
+  const bIndex = categoryOrder.indexOf(b);
+  if (aIndex !== -1 || bIndex !== -1) {
+    return (
+      (aIndex === -1 ? categoryOrder.length : aIndex) -
+      (bIndex === -1 ? categoryOrder.length : bIndex)
+    );
+  }
+  return a.localeCompare(b);
+};
+const categories = [
+  ...new Set(
+    posts
+      .map((post) => post.data.category)
+      .filter((category): category is string => Boolean(category))
+  ),
+].sort(sortByCategoryOrder);
+const filters = categories.map((category) => ({
+  key: `category:${category}`,
+  label: category,
+  count: posts.filter((post) => post.data.category === category).length,
+}));
+const Heading = headingLevel;
+---
+
+<section
+  class="post-feed"
+  data-post-feed
+  data-page-size={initialVisible}
+  data-show-more={showMore ? 'true' : 'false'}
+>
+  {
+    showFilters && (
+      <div class="feed-controls">
+        <label class="feed-search">
+          <span class="sr-only">{labels.searchLabel}</span>
+          <span class="feed-search-icon" aria-hidden="true">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              focusable="false"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m16 16 4 4" />
+            </svg>
+          </span>
+          <input
+            type="search"
+            class="feed-search-input"
+            data-feed-search
+            placeholder=" "
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </label>
+        {filters.length > 0 && (
+          <div class="feed-filter-rail" data-feed-filter-rail>
+            <button
+              type="button"
+              class="feed-filter-scroll feed-filter-scroll-prev"
+              data-feed-filter-scroll="prev"
+              aria-label={labels.previousCategories}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="feed-filters"
+              data-feed-filters
+              role="group"
+              aria-label={labels.filterLabel}
+            >
+              <button
+                type="button"
+                class="feed-filter is-active"
+                data-feed-filter="all"
+                aria-pressed="true"
+              >
+                <span>{labels.all}</span>
+                <span class="feed-filter-count">{posts.length}</span>
+              </button>
+              {filters.map((filter) => (
+                <button
+                  type="button"
+                  class="feed-filter"
+                  data-feed-filter={filter.key}
+                  aria-pressed="false"
+                >
+                  <span>{filter.label}</span>
+                  <span class="feed-filter-count">{filter.count}</span>
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              class="feed-filter-scroll feed-filter-scroll-next"
+              data-feed-filter-scroll="next"
+              aria-label={labels.nextCategories}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  <ol class="feed-list">
+    {
+      posts.map((post, index) => (
+        <li
+          class="feed-item"
+          data-feed-item
+          data-category={post.data.category ?? ''}
+          data-search={`${post.data.title} ${post.data.description} ${post.data.category ?? ''}`.toLocaleLowerCase()}
+          data-index={index}
+        >
+          <a href={withBase(`${basePath}/${postSlug(post.id)}/`)} class="feed-link">
+            <FormattedDate class="feed-date" date={post.data.pubDate} />
+            <div class="feed-body">
+              <Heading class="feed-title">{post.data.title}</Heading>
+              {post.data.description && <p class="feed-desc">{post.data.description}</p>}
+              {post.data.category && (
+                <div class="feed-meta">
+                  <span class="feed-category">{post.data.category}</span>
+                </div>
+              )}
+            </div>
+            <span class="feed-arrow" aria-hidden="true">
+              ↗
+            </span>
+            <span class="sr-only">{labels.read}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="feed-empty" data-feed-empty hidden>{labels.empty}</p>
+  {
+    showMore && posts.length > initialVisible && (
+      <>
+        <button type="button" class="feed-more" data-feed-more>
+          {labels.more}
+        </button>
+        <div class="feed-sentinel" data-feed-sentinel aria-hidden="true" />
+      </>
+    )
+  }
+</section>
+
+<script>
+  import { onReady } from '../scripts/mount';
+  import { mountPostFeeds } from '../scripts/post-feed';
+
+  onReady(mountPostFeeds);
+</script>

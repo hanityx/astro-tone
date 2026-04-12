@@ -1,0 +1,28 @@
+.blog-main {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: var(--space-20) var(--space-6) var(--space-24);
+}
+
+.blog-header {
+  padding-bottom: var(--space-10);
+  margin-bottom: var(--space-6);
+}
+
+.blog-label {
+  margin: 0 0 var(--space-2);
+}
+
+.blog-title {
+  font-size: clamp(2.125rem, 5vw, 2.875rem);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .blog-main {
+    padding: var(--space-12) var(--space-4) var(--space-16);
+  }
+}
