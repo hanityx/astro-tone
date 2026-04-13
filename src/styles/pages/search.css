@@ -1,0 +1,28 @@
+.search-main {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-6) var(--space-16);
+}
+
+.search-header {
+  margin-bottom: var(--space-8);
+}
+
+.search-title {
+  font-size: var(--text-title-1);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+.search-ui {
+  --pagefind-ui-scale: 0.95;
+  --pagefind-ui-primary: var(--color-blue);
+  --pagefind-ui-text: var(--label-primary);
+  --pagefind-ui-background: var(--bg-primary);
+  --pagefind-ui-border: var(--separator);
+  --pagefind-ui-tag: var(--fill-secondary);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: var(--radius-lg);
+  --pagefind-ui-font: var(--font-sans);
+}

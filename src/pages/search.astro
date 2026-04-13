@@ -1,0 +1,20 @@
+---
+import '../styles/pages/search.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search" description="Search blog posts" robots="noindex, follow">
+  <main id="main-content" class="search-main">
+    <div class="search-header">
+      <h1 class="search-title">Search</h1>
+    </div>
+    <div id="search" class="search-ui"></div>
+  </main>
+
+  <script>
+    import { onReady } from '../scripts/mount';
+    import { mountSearchPage } from '../scripts/search-page';
+
+    onReady(mountSearchPage);
+  </script>
+</BaseLayout>
