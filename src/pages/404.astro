@@ -1,0 +1,23 @@
+---
+import '../styles/pages/not-found.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you requested does not exist."
+  robots="noindex, follow"
+>
+  <main class="not-found-main" id="main-content">
+    <div class="not-found-inner">
+      <p class="not-found-code">404</p>
+      <h1 class="not-found-title">Page not found</h1>
+      <p class="not-found-desc">The URL may be wrong, or the page may have been removed.</p>
+      <div class="not-found-actions">
+        <a href={withBase('/')} class="btn btn-primary">Home</a>
+        <a href={withBase('/blog')} class="btn btn-secondary">All posts</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
