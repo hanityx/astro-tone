@@ -1,10 +1,147 @@
 ---
-import Layout from '../components/layout/Layout.astro';
+import '../styles/pages/about.css';
+import config from '../../astro-theme-config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const profileImageUrl = config.about.profileImage.trim();
+const hasProfileImage = profileImageUrl.length > 0;
+const profileName = config.about.name || config.site.author;
+const profileRole = config.about.role;
+const profileLocation = config.about.location;
+const profileFocus = config.about.focus;
+const profileLead = config.about.lead;
+const [headlineFirst, headlineSecond] = config.about.headline;
+const statementLabel = config.about.statementLabel;
+const statementTitle = config.about.statementTitle;
+const statement = config.about.statement;
+const careerLabel = config.about.careerLabel;
+const careerHeading = config.about.careerHeading;
+const careerItems = config.about.career;
+const focusItems = config.about.interests;
+const interestsLabel = config.about.interestsLabel;
+const interestsHeading = config.about.interestsHeading;
+const profileLinks = [
+  {
+    label: 'GitHub',
+    href: config.social.github,
+  },
+  {
+    label: 'Website',
+    href: config.social.website,
+  },
+  {
+    label: 'LinkedIn',
+    href: config.social.linkedin,
+  },
+  {
+    label: 'Email',
+    href: config.social.email ? `mailto:${config.social.email}` : '',
+  },
+].filter((link) => link.href);
 ---
 
-<Layout title="About">
-  <h1 class="text-3xl font-bold text-slate-100">About</h1>
-  <p class="mt-4 leading-7 text-slate-300">
-    This project is a minimal Astro blog starter organized for a clean first commit.
-  </p>
-</Layout>
+<BaseLayout title="About" description={profileLead}>
+  <main id="main-content" class="about-main">
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="about-intro">
+        <h1 id="about-title" class="about-title">
+          {headlineFirst}<br />
+          {headlineSecond}
+        </h1>
+        <p class="about-lead">
+          {profileLead}
+        </p>
+      </div>
+
+      <aside
+        class:list={['profile-panel', !hasProfileImage && 'profile-panel--text']}
+        aria-label="Profile preview"
+      >
+        {
+          hasProfileImage && (
+            <figure class="profile-media">
+              <img
+                src={profileImageUrl}
+                width="720"
+                height="720"
+                alt={`${profileName} profile portrait`}
+                loading="eager"
+                referrerpolicy="no-referrer"
+              />
+            </figure>
+          )
+        }
+        <div class="profile-summary">
+          <p class="profile-name">{profileName}</p>
+          <p class="profile-role">{profileRole}</p>
+        </div>
+        <dl class="profile-meta">
+          <div>
+            <dt>Location</dt>
+            <dd>{profileLocation}</dd>
+          </div>
+          <div>
+            <dt>Focus</dt>
+            <dd>{profileFocus}</dd>
+          </div>
+          {
+            profileLinks.length > 0 && (
+              <div>
+                <dt>Links</dt>
+                <dd class="profile-links">
+                  {profileLinks.map((link) => (
+                    <a
+                      href={link.href}
+                      target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel={link.href.startsWith('mailto:') ? undefined : 'noopener'}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </dd>
+              </div>
+            )
+          }
+        </dl>
+      </aside>
+    </section>
+
+    <section class="about-section about-statement" aria-labelledby="about-statement">
+      <p class="section-label">{statementLabel}</p>
+      <div>
+        <h2 id="about-statement" class="section-heading">
+          {statementTitle}
+        </h2>
+        <p>{statement}</p>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-career">
+      <p class="section-label">{careerLabel}</p>
+      <div class="career-list">
+        <h2 id="about-career" class="sr-only">{careerHeading}</h2>
+        {
+          careerItems.map((item) => (
+            <article class="career-item">
+              <time>{item.period}</time>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-focus">
+      <p class="section-label">{interestsLabel}</p>
+      <div>
+        <h2 id="about-focus" class="section-heading">{interestsHeading}</h2>
+        <ul class="focus-list">
+          {focusItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,327 @@
+.about-main {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: var(--space-20) var(--space-6) var(--space-24);
+}
+
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 18rem);
+  gap: var(--space-12);
+  align-items: start;
+  padding-bottom: var(--space-12);
+}
+
+.section-label {
+  margin: 0;
+  color: var(--color-blue);
+  font-size: var(--text-caption-1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.about-title {
+  max-width: 9ch;
+  margin: 0;
+  color: var(--label-primary);
+  font-size: clamp(3.5rem, 6.7vw, 5.5rem);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.94;
+}
+
+.about-lead {
+  max-width: 38rem;
+  margin: var(--space-8) 0 0;
+  color: var(--label-secondary);
+  font-size: var(--text-title-3);
+  line-height: var(--leading-normal);
+}
+
+.profile-panel {
+  display: grid;
+  align-content: start;
+  gap: var(--space-5);
+}
+
+.profile-panel--text {
+  gap: var(--space-6);
+  margin-top: 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--separator);
+}
+
+.profile-summary {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.profile-panel--text .profile-summary {
+  position: relative;
+}
+
+.profile-panel--text .profile-summary::before {
+  position: absolute;
+  top: calc(var(--space-5) * -1 - 1px);
+  left: 0;
+  width: 2.75rem;
+  height: 1px;
+  background: var(--color-blue);
+  content: '';
+}
+
+.profile-media {
+  position: relative;
+  aspect-ratio: 1;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+}
+
+.profile-media::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in srgb, var(--label-primary) 12%, transparent);
+  border-radius: inherit;
+  content: '';
+  pointer-events: none;
+}
+
+.profile-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.profile-name {
+  margin: 0;
+  color: var(--label-primary);
+  font-size: var(--text-title-3);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.profile-role {
+  margin: 0;
+  color: var(--label-secondary);
+  font-size: var(--text-callout);
+  line-height: var(--leading-normal);
+}
+
+.profile-meta {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-2) 0 0;
+}
+
+.profile-meta div {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.profile-meta dt,
+.career-item time {
+  color: var(--label-tertiary);
+  font-size: var(--text-footnote);
+  font-weight: var(--weight-semibold);
+}
+
+.profile-meta dd {
+  margin: 0;
+  color: var(--label-primary);
+  font-size: var(--text-footnote);
+  line-height: var(--leading-normal);
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-3);
+}
+
+.profile-links a {
+  color: var(--label-primary);
+  font-weight: var(--weight-semibold);
+  text-decoration-color: transparent;
+  text-underline-offset: 0.25em;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    text-decoration-color var(--duration-fast) var(--ease-out);
+}
+
+.profile-links a:hover {
+  color: var(--color-blue);
+  opacity: 1;
+  text-decoration-color: currentColor;
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: var(--space-10);
+  padding: var(--space-10) 0;
+  border-top: 1px solid var(--separator);
+}
+
+.section-heading {
+  max-width: 20ch;
+  margin: 0;
+  color: var(--label-primary);
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.about-statement p:not(.section-label) {
+  max-width: 42rem;
+  margin: var(--space-4) 0 0;
+  color: var(--label-secondary);
+  font-size: var(--text-callout);
+  line-height: var(--leading-relaxed);
+}
+
+.career-item > :where(p) {
+  max-width: 42rem;
+  margin: var(--space-4) 0 0;
+  color: var(--label-secondary);
+  font-size: var(--text-callout);
+  line-height: var(--leading-relaxed);
+}
+
+.career-list {
+  display: grid;
+  gap: var(--space-10);
+}
+
+.career-item {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: var(--space-6);
+}
+
+.career-item h3 {
+  margin: 0;
+  color: var(--label-primary);
+  font-size: var(--text-title-3);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.focus-list {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.focus-list li {
+  position: relative;
+  padding-left: var(--space-6);
+  color: var(--label-primary);
+  font-size: var(--text-callout);
+  line-height: var(--leading-normal);
+}
+
+.focus-list li::before {
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 0.75rem;
+  height: 1px;
+  background: var(--color-blue);
+  content: '';
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 48rem) {
+  .about-main {
+    padding: var(--space-12) var(--space-6) var(--space-16);
+  }
+
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  .about-title {
+    max-width: 9ch;
+    font-size: clamp(3.25rem, 14vw, 4.75rem);
+  }
+
+  .about-lead {
+    font-size: var(--text-callout);
+  }
+
+  .profile-panel {
+    grid-template-columns: minmax(7rem, 9rem) minmax(0, 1fr);
+    align-items: end;
+    gap: var(--space-5);
+  }
+
+  .profile-panel--text {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .profile-meta {
+    grid-column: 1 / -1;
+  }
+
+  .about-section,
+  .career-item {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .about-section {
+    padding: var(--space-8) 0;
+  }
+}
+
+@media (max-width: 28rem) {
+  .about-main {
+    padding-right: var(--space-4);
+    padding-left: var(--space-4);
+  }
+
+  .about-title {
+    max-width: 7ch;
+    font-size: clamp(3rem, 13vw, 4rem);
+  }
+
+  .about-lead {
+    max-width: 31ch;
+  }
+
+  .profile-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-media {
+    max-width: 13rem;
+  }
+
+  .profile-meta div {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}

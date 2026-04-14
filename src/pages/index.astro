@@ -1,32 +1,109 @@
 ---
+import '../styles/pages/home.css';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import Layout from '../components/layout/Layout.astro';
+import FeaturedPostGrid from '../components/FeaturedPostGrid.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getUiText } from '../ui';
+import { withBase } from '../utils/paths';
+const tr = getUiText();
 
-const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 9);
+
+const [featured, ...rest] = posts;
+const recentPosts = posts.slice(0, 2);
+const gridPosts = rest.slice(0, 3);
 ---
 
-<Layout title="Home">
-  <section class="mb-10">
-    <h1 class="text-4xl font-bold text-slate-100">Latest Posts</h1>
-    <p class="mt-3 text-slate-400">Clean and simple starter for your first public commit.</p>
-  </section>
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main id="main-content" class="home-main">
+    <section class="hero">
+      <h1 class="hero-title">
+        <span class="hero-title-line">{tr.heroTitle}</span>
+        {
+          tr.heroTitleLine2 && (
+            <span class="hero-title-line hero-title-line--accent">{tr.heroTitleLine2}</span>
+          )
+        }
+      </h1>
 
-  <section class="grid gap-4">
-    {posts.map((post) => (
-      <article class="rounded-xl border border-slate-800 bg-slate-900/40 p-5">
-        <a href={`/posts/${post.slug}`} class="block">
-          <h2 class="text-2xl font-semibold text-slate-100">{post.data.title}</h2>
-          <p class="mt-2 text-sm text-slate-400">{post.data.summary}</p>
-          <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
-            <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString()}</time>
-            {(post.data.tags || []).map((tag) => (
-              <span class="rounded border border-slate-700 px-2 py-0.5">{tag}</span>
-            ))}
+      <p class="hero-desc">{SITE_DESCRIPTION}</p>
+
+      <div class="hero-divider" aria-hidden="true"></div>
+
+      {
+        recentPosts.length > 0 && (
+          <nav class="hero-recent" aria-label="Recent posts">
+            <div class="hero-recent-list">
+              {recentPosts.map((post) => (
+                <a href={withBase(`/blog/${post.id}/`)} class="hero-recent-item">
+                  <span class="hero-recent-main">
+                    <span class="hero-recent-title">{post.data.title}</span>
+                    <span class="hero-recent-arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </span>
+                  <span class="hero-recent-date">
+                    <FormattedDate date={post.data.pubDate} />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </nav>
+        )
+      }
+    </section>
+
+    {
+      featured && (
+        <section class="featured-section">
+          <a href={withBase(`/blog/${featured.id}/`)} class="featured-card">
+            <div class="featured-text">
+              <p class="featured-meta">
+                <FormattedDate date={featured.data.pubDate} />
+              </p>
+              <h2 class="featured-title">{featured.data.title}</h2>
+              {featured.data.description && (
+                <p class="featured-desc">{featured.data.description}</p>
+              )}
+              <span class="featured-cta">{tr.readLink}</span>
+            </div>
+            <div class="featured-thumb-wrap">
+              {featured.data.heroImage ? (
+                <Image
+                  src={featured.data.heroImage}
+                  alt={featured.data.title}
+                  class="featured-thumb"
+                  widths={[400, 720, 960, 1280]}
+                  sizes="(max-width: 600px) calc(100vw - 32px), 360px"
+                  quality={88}
+                  loading="lazy"
+                />
+              ) : (
+                <div class="featured-thumb card-img-placeholder" />
+              )}
+            </div>
+          </a>
+        </section>
+      )
+    }
+
+    {
+      gridPosts.length > 0 && (
+        <section class="posts-section">
+          <div class="posts-header">
+            <a href={withBase('/blog')} class="view-all">
+              {tr.viewAll}
+            </a>
           </div>
-        </a>
-      </article>
-    ))}
-  </section>
-</Layout>
+          <FeaturedPostGrid posts={gridPosts} />
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>
