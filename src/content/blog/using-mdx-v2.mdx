@@ -1,0 +1,114 @@
+---
+title: 'When to Reach for MDX'
+description: 'Most posts should stay as Markdown. Switch to MDX only when an Astro component belongs inline.'
+pubDate: '2026-02-24'
+category: 'MDX'
+heroImage: '../../assets/tone-sample-glass-grid.jpg'
+---
+
+import FigureNote from '../../components/FigureNote.astro';
+
+Markdown handles most writing. Headings, paragraphs, links, lists, quotes, code, images. Stay in Markdown by default.
+
+Switch to MDX when an Astro component needs to live inside the post — not next to it, not below it, but in the exact place the prose is referring to.
+
+This file is an MDX file. Watch what `FigureNote` does here:
+
+<FigureNote title="MDX example">
+  This block is an Astro component called from inside the post. The prose around it does not break,
+  and the component shares the site's design tokens.
+</FigureNote>
+
+The component sits inline. The article continues. That is the only thing MDX is for.
+
+## How to switch a post to MDX
+
+1. Rename the file from `.md` to `.mdx`.
+2. After the frontmatter, import the component:
+
+   ```mdx
+   import FigureNote from '../../components/FigureNote.astro';
+   ```
+
+3. Use it like an HTML tag in the body:
+
+   ```mdx
+   <FigureNote title="Tip">Inline content goes here.</FigureNote>
+   ```
+
+That is the whole switch. Markdown still works around the component.
+
+## The example component
+
+The starter includes one prose component: `FigureNote`. It is small on purpose.
+
+`src/components/FigureNote.astro`:
+
+```astro
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'Note' } = Astro.props;
+---
+
+<aside class="figure-note">
+  <p class="figure-note__label">{title}</p>
+  <div class="figure-note__body">
+    <slot />
+  </div>
+</aside>
+```
+
+Its style lives in `src/styles/components/figure-note.css` and uses the same tokens as the rest of the theme. If you change `--color-blue` or `--label-tertiary`, the note follows.
+
+## Build your own
+
+A useful prose component is small, reads like an HTML element, and earns its place by clarifying the explanation.
+
+Good candidates:
+
+- A callout with a specific tone (note, tip, warning).
+- A side-by-side comparison block.
+- A figure with a richer caption than `*caption*` allows.
+- A pull quote that needs different styling from a blockquote.
+
+Skip:
+
+- Decoration between paragraphs.
+- Cards that summarize what the prose already said.
+- Anything with internal state, network calls, or its own routing.
+
+If a component needs state or behavior, it usually belongs in a page route, not in a post. The post can link to it.
+
+## Where the files live
+
+Astro components imported into MDX can live anywhere under `src/components/`. The starter keeps prose-specific components there too. `FigureNote.astro` is one.
+
+Component CSS lives in `src/styles/components/`. Import it from the top of the `.astro` file:
+
+```astro
+---
+import '../styles/components/figure-note.css';
+---
+```
+
+Astro hoists the import and includes the CSS once, no matter how many posts use the component.
+
+## Keep the source readable
+
+An MDX file is still a document. Two or three custom blocks per post is plenty. Once a post needs ten components and 50 lines of JSX, it has stopped being writing and started being a page template.
+
+That is the moment to move the work into a real route under `src/pages/` and link to it from a Markdown post.
+
+## When Markdown wins
+
+If a post does not need a custom block, leave it as Markdown:
+
+- Faster to read in the editor.
+- Easier to move between blogs.
+- No imports to track.
+- Renders the same way through the theme.
+
+MDX is a small upgrade, not a default. Use it when the upgrade pays for itself.

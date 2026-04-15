@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <text y=".9em" font-size="90">📝</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tone">
+  <defs>
+    <linearGradient id="tone-mark" x1="14" y1="12" x2="50" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8f8f8" />
+      <stop offset="0.58" stop-color="#d7d7d7" />
+      <stop offset="1" stop-color="#9a9a9a" />
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#tone-mark)" />
 </svg>
-
