@@ -1,0 +1,16 @@
+---
+import '../styles/components/figure-note.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Note' } = Astro.props;
+---
+
+<aside class="figure-note">
+  <p class="figure-note__label">{title}</p>
+  <div class="figure-note__body">
+    <slot />
+  </div>
+</aside>
