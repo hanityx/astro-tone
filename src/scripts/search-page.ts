@@ -60,6 +60,7 @@ async function initSearchPage() {
   try {
     await loadPagefindUi();
     if (!window.PagefindUI) throw new Error('Pagefind UI failed to load');
+    el.replaceChildren();
     new window.PagefindUI({
       element: '#search',
       showSubResults: true,
@@ -68,7 +69,9 @@ async function initSearchPage() {
         zero_results: 'No results for [QUERY]',
       },
     });
+    el.setAttribute('aria-busy', 'false');
   } catch {
+    el.setAttribute('aria-busy', 'false');
     el.textContent = 'Search is available after a production build.';
   }
 }
