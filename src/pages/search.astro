@@ -8,7 +8,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="search-header">
       <h1 class="search-title">Search</h1>
     </div>
-    <div id="search" class="search-ui"></div>
+    <div id="search" class="search-ui" aria-busy="true">
+      <p class="search-loading" role="status">Loading search...</p>
+    </div>
   </main>
 
   <script>

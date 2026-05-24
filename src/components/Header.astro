@@ -11,7 +11,7 @@ const headerTitle = config.site.logoLabel || config.site.title;
 const navItems = config.nav;
 ---
 
-<a href="#main-content" class="skip-link">{skipLinkLabel}</a>
+<a href="#main-content" class="skip-link" tabindex="0">{skipLinkLabel}</a>
 <header class="site-header glass">
   <nav class="nav-inner" aria-label={navAriaLabel}>
     <a href={withBase('/')} class="nav-logo">{headerTitle}</a>

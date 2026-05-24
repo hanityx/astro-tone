@@ -4,8 +4,8 @@
 
 /* Skip-to-content link hidden off-screen until focus. */
 .skip-link {
-  position: absolute;
-  top: -100%;
+  position: fixed;
+  top: 0;
   left: var(--space-4);
   z-index: 9999;
   padding: var(--space-2) var(--space-5);
@@ -15,13 +15,14 @@
   font-weight: 600;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   text-decoration: none;
-  transition: top 150ms ease-out;
+  transform: translateY(calc(-100% - var(--space-2)));
+  transition: transform 150ms ease-out;
 }
 
 .skip-link:focus {
-  top: 0;
   outline: 2px solid #fff;
   outline-offset: 2px;
+  transform: translateY(0);
 }
 
 /* Focus ring for keyboard navigation. */
@@ -33,6 +34,10 @@
 
 /* Hide outline for non-keyboard focus. */
 :focus:not(:focus-visible) {
+  outline: none;
+}
+
+#main-content:focus {
   outline: none;
 }
 

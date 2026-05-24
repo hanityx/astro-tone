@@ -26,3 +26,11 @@
   --pagefind-ui-border-radius: var(--radius-lg);
   --pagefind-ui-font: var(--font-sans);
 }
+
+.search-loading {
+  margin: 0;
+  padding: var(--space-5) 0;
+  color: var(--label-tertiary);
+  font-size: var(--text-callout);
+  border-top: 1px solid var(--separator);
+}

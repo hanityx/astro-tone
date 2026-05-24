@@ -57,5 +57,11 @@ const htmlLang = lang ?? config.site.lang;
     <SearchPalette />
     <slot />
     <Footer />
+    <script>
+      import { onReady } from '../scripts/mount';
+      import { mountSkipLinkFocus } from '../scripts/skip-link';
+
+      onReady(mountSkipLinkFocus);
+    </script>
   </body>
 </html>
