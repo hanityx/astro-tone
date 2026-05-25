@@ -8,7 +8,7 @@ Pagefind search, RSS, sitemap output, and a minimal writing surface.
   <a href="https://github.com/hanityx/astro-tone">Use this template</a>
 </p>
 
-![Tone responsive preview](docs/readme/astro-tone-showcase-1600x900.png)
+![Tone responsive preview](assets/demo/astro-tone-showcase-1600x900.png)
 
 ## Features
 
@@ -112,5 +112,5 @@ No analytics run by default. To opt into Vercel Analytics, set
 
 ## License
 
-Tone source code is MIT licensed. Bundled sample images have separate
-upstream terms; see `licenses/THIRD_PARTY_NOTICES.md`.
+Tone source code is MIT licensed. Bundled sample images and project marks are
+documented in `LICENSE`.
