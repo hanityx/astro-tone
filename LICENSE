@@ -3,8 +3,8 @@ MIT License
 Copyright (c) 2026 Astro Tone contributors
 
 This license applies to Tone source code unless a file or notice states
-otherwise. Bundled demo assets are documented in the Third-Party Notices
-section below.
+otherwise. Bundled demo assets are documented in the Third-Party and Demo
+Asset Notices section below.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Third-Party Notices
--------------------
+Third-Party and Demo Asset Notices
+----------------------------------
 
 Bundled demo assets are included for starter and demo use, and remain subject
 to their upstream terms. Replace the sample assets before publishing a
@@ -43,8 +43,9 @@ Sample images:
 - `src/assets/tone-sample-blue-architecture.jpg`:
   Unsplash, Mikita Yo, "blue and white glass walled high rise building."
   https://unsplash.com/photos/blue-and-white-glass-walled-high-rise-building-wN6w_UHsARY
-- `src/assets/view-transparent-crystal-water.jpg`:
-  User-provided sample image for demo content.
+- `src/assets/tone-sample-ai-water.jpg`:
+  AI-generated sample image created for Tone demo content; not sourced from a
+  stock-photo provider.
 
 References:
 

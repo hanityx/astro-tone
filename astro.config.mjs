@@ -11,6 +11,14 @@ import { toneExpressiveCodeOptions } from './src/config/expressive-code.ts';
 
 // https://astro.build/config
 const sitemapExcludedPaths = new Set(['/search/']);
+const configuredBase = config.site.base === '/' ? '' : config.site.base.replace(/\/$/, '');
+
+function withoutConfiguredBase(pathname) {
+  if (!configuredBase) return pathname;
+  if (!pathname.startsWith(configuredBase)) return pathname;
+
+  return pathname.slice(configuredBase.length) || '/';
+}
 
 export default defineConfig({
   site: config.site.url,
@@ -19,7 +27,7 @@ export default defineConfig({
     expressiveCode(toneExpressiveCodeOptions),
     mdx(),
     sitemap({
-      filter: (page) => !sitemapExcludedPaths.has(new URL(page).pathname.replace(config.site.base, '')),
+      filter: (page) => !sitemapExcludedPaths.has(withoutConfiguredBase(new URL(page).pathname)),
     }),
   ],
   build: {
