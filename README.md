@@ -62,7 +62,9 @@ Requires Node.js 22.12.0 or newer.
 Use the template:
 
 ```bash
-npm create astro@latest -- --template hanityx/astro-tone
+npm create astro@latest astro-tone -- --template hanityx/astro-tone
+cd astro-tone
+npm run dev
 ```
 
 Or clone it directly:
