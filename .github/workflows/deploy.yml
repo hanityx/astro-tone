@@ -25,11 +25,17 @@ jobs:
           node-version: 22
           cache: npm
       - uses: actions/configure-pages@v6
+      - name: Configure Astro for GitHub Pages
+        run: |
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          echo "ASTRO_SITE_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io" >> "$GITHUB_ENV"
+          if [ "$repo_name" = "${GITHUB_REPOSITORY_OWNER}.github.io" ]; then
+            echo "ASTRO_SITE_BASE=" >> "$GITHUB_ENV"
+          else
+            echo "ASTRO_SITE_BASE=/$repo_name" >> "$GITHUB_ENV"
+          fi
       - run: npm ci
       - run: npm run build
-        env:
-          ASTRO_SITE_URL: https://hanityx.github.io
-          ASTRO_SITE_BASE: /astro-tone
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
