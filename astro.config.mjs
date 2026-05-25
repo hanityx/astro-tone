@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import expressiveCode from 'astro-expressive-code';
 import { defineConfig } from 'astro/config';
+import process from 'node:process';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import config from './astro-theme-config.ts';
@@ -11,7 +12,10 @@ import { toneExpressiveCodeOptions } from './src/config/expressive-code.ts';
 
 // https://astro.build/config
 const sitemapExcludedPaths = new Set(['/search/']);
-const configuredBase = config.site.base === '/' ? '' : config.site.base.replace(/\/$/, '');
+const configuredSite = process.env.ASTRO_SITE_URL || config.site.url;
+const configuredBaseValue = process.env.ASTRO_SITE_BASE ?? config.site.base;
+const configuredBase =
+  configuredBaseValue === '/' ? '' : configuredBaseValue.replace(/\/$/, '');
 
 /** @param {string} pathname */
 function withoutConfiguredBase(pathname) {
@@ -22,8 +26,8 @@ function withoutConfiguredBase(pathname) {
 }
 
 export default defineConfig({
-  site: config.site.url,
-  base: config.site.base,
+  site: configuredSite,
+  base: configuredBase || undefined,
   integrations: [
     expressiveCode(toneExpressiveCodeOptions),
     mdx(),

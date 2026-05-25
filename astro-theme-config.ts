@@ -13,9 +13,9 @@ type NavItem = {
 const config = {
   site: {
     /** Production origin, used for canonical links, sitemap, and Open Graph metadata. */
-    url: 'https://hanityx.github.io',
-    /** GitHub Pages project path. Use '' when deploying at a domain root. */
-    base: '/astro-tone',
+    url: 'https://example.com',
+    /** Subpath such as '/repo-name'. Keep empty when deploying at a domain root. */
+    base: '',
     lang: 'en',
     locale: 'en_US',
     dateLocale: 'en-US',

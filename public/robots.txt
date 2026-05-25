@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hanityx.github.io/astro-tone/sitemap-index.xml
