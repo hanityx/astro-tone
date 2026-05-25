@@ -13,6 +13,7 @@ import { toneExpressiveCodeOptions } from './src/config/expressive-code.ts';
 const sitemapExcludedPaths = new Set(['/search/']);
 const configuredBase = config.site.base === '/' ? '' : config.site.base.replace(/\/$/, '');
 
+/** @param {string} pathname */
 function withoutConfiguredBase(pathname) {
   if (!configuredBase) return pathname;
   if (!pathname.startsWith(configuredBase)) return pathname;
