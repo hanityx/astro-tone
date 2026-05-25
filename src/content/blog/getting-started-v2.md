@@ -13,9 +13,8 @@ Skip any step that does not apply.
 ## Install
 
 ```bash
-npm create astro@latest -- --template hanityx/astro-tone
-cd astro-tone
-npm install
+npm create astro@latest my-blog -- --template hanityx/astro-tone
+cd my-blog
 npm run dev
 ```
 
@@ -27,8 +26,8 @@ Open `astro-theme-config.ts`. This is the only file you need to touch for site-w
 
 ```ts
 site: {
-  url: 'https://hanityx.github.io',
-  base: '/astro-tone',
+  url: 'https://your-site.com',
+  base: '',
   title: 'Your Site',
   logoLabel: 'Tone',
   description: 'One short line about the site.',
@@ -144,6 +143,8 @@ Vercel, Netlify, and Cloudflare Pages all detect Astro automatically. Import the
 After the first live deploy, set `site.url` in `astro-theme-config.ts` to the real domain and redeploy. Canonical links, RSS, sitemap, and social previews all depend on it.
 
 If you deploy under a subpath such as `username.github.io/repo`, set `site.base` in `astro-theme-config.ts` before publishing. The Astro config reads that value for you.
+
+The bundled GitHub Pages workflow sets `ASTRO_SITE_URL` and `ASTRO_SITE_BASE` automatically for project pages. For example, a repository named `my-blog` deploys with `/my-blog`; a user site repository named `username.github.io` deploys at the domain root.
 
 ## Enable comments (optional)
 
