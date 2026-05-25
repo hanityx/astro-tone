@@ -34,3 +34,9 @@
   font-size: var(--text-callout);
   border-top: 1px solid var(--separator);
 }
+
+.search-fallback {
+  margin: var(--space-4) 0 0;
+  color: var(--label-secondary);
+  font-size: var(--text-callout);
+}

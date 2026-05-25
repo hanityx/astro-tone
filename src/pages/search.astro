@@ -1,6 +1,7 @@
 ---
 import '../styles/pages/search.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
 ---
 
 <BaseLayout title="Search" description="Search blog posts" robots="noindex, follow">
@@ -10,6 +11,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
     <div id="search" class="search-ui" aria-busy="true">
       <p class="search-loading" role="status">Loading search...</p>
+      <noscript>
+        <style>
+          .search-loading {
+            display: none;
+          }
+        </style>
+        <p class="search-fallback">
+          Search needs JavaScript. Browse the <a href={withBase('/blog/')}>blog archive</a> instead.
+        </p>
+      </noscript>
     </div>
   </main>
 

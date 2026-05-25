@@ -3,7 +3,7 @@ title: 'Set Up Astro Tone in Ten Minutes'
 description: 'Clone, edit one config file, write one real post, deploy. The shortest path through the starter.'
 pubDate: '2026-04-15'
 category: 'Getting Started'
-heroImage: '../../assets/view-transparent-crystal-water.jpg'
+heroImage: '../../assets/tone-sample-ai-water.jpg'
 ---
 
 The starter is a small Astro site. By the end of this post you will have your name on the home page, one real post, and a deploy that points to your domain.
