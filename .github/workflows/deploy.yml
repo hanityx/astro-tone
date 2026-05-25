@@ -27,6 +27,9 @@ jobs:
       - uses: actions/configure-pages@v5
       - run: npm ci
       - run: npm run build
+        env:
+          ASTRO_SITE_URL: https://hanityx.github.io
+          ASTRO_SITE_BASE: /astro-tone
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
