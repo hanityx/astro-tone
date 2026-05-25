@@ -7,6 +7,14 @@ export default [
   ...tseslint.configs.recommended,
   ...astroPlugin.configs.recommended,
   {
+    files: ['*.mjs'],
+    languageOptions: {
+      globals: {
+        URL: 'readonly',
+      },
+    },
+  },
+  {
     rules: {
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],

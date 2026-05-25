@@ -60,7 +60,7 @@ src/
   styles/             Tokens, prose, page, layout, and component CSS
   ui.ts               Shared UI labels
 
-licenses/            Third-party notices
+LICENSE              License and third-party notices
 ```
 
 Use `astro-theme-config.ts` first. Reach into `src/styles/` when you want to change the visual system, and `src/components/` only when the structure needs to change.

@@ -27,7 +27,7 @@ playwright-report/
 # editor and OS files
 .DS_Store
 .idea/
-.vscode/settings.json
+.vscode/
 
 # local notes
 local-docs/

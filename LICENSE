@@ -2,9 +2,9 @@ MIT License
 
 Copyright (c) 2026 Astro Tone contributors
 
-This license applies to Astro Tone source code unless a file or notice states
-otherwise. Bundled demo assets are documented in
-`licenses/THIRD_PARTY_NOTICES.md`.
+This license applies to Tone source code unless a file or notice states
+otherwise. Bundled demo assets are documented in the Third-Party Notices
+section below.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,3 +23,38 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Third-Party Notices
+-------------------
+
+Bundled demo assets are included for starter and demo use, and remain subject
+to their upstream terms. Replace the sample assets before publishing a
+production site if your project needs a different licensing workflow.
+
+Sample images:
+
+- `src/assets/tone-sample-glass-building.jpg`:
+  Pexels, Konstantin Olsen,
+  "Contemporary glass building facade with reflections in the city."
+  https://www.pexels.com/photo/blue-glass-building-287263/
+- `src/assets/tone-sample-glass-grid.jpg`:
+  Pexels, Michael Li, "Glass Modern Architecture."
+  https://www.pexels.com/photo/glass-modern-architecture-17159619/
+- `src/assets/tone-sample-blue-architecture.jpg`:
+  Unsplash, Mikita Yo, "blue and white glass walled high rise building."
+  https://unsplash.com/photos/blue-and-white-glass-walled-high-rise-building-wN6w_UHsARY
+- `src/assets/view-transparent-crystal-water.jpg`:
+  User-provided sample image for demo content.
+
+References:
+
+- Pexels License: https://www.pexels.com/license/
+- Unsplash License: https://unsplash.com/license
+- Unsplash attribution guidance: https://help.unsplash.com/en/articles/2511315-guideline-attribution
+- Unsplash usage guidance: https://help.unsplash.com/en/articles/2612337-do-i-have-to-give-credit-to-a-contributor-when-i-use-their-image
+
+Favicon and app icons:
+
+`public/favicon.svg`, `public/favicon.ico`, `public/favicon-16x16.png`,
+`public/favicon-32x32.png`, and `public/apple-touch-icon.png` are Tone project
+marks and are covered by this repository's license.
