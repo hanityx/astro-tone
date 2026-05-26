@@ -56,13 +56,13 @@ src/
   layouts/            Shared layouts
   pages/              Routes
   scripts/            Client-side behavior
-  styles/             Tokens, prose, page, layout, and component CSS
+  styles/             Tokens, prose, page, layout, and shared behavior CSS
   ui.ts               Shared UI labels
 
 LICENSE              License and third-party notices
 ```
 
-Use `astro-theme-config.ts` first. Reach into `src/styles/` when you want to change the visual system, and `src/components/` only when the structure needs to change.
+Use `astro-theme-config.ts` first. Reach into `src/styles/` for site-level styles, prose, page layouts, and shared behavior. Reach into `src/components/` when component structure or component-owned styles need to change.
 
 ## Decide what the header shows
 

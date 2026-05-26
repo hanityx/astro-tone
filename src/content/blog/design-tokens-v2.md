@@ -105,7 +105,7 @@ If the new font is variable, keep `font-weight: 100 900` or the range it support
 
 Sometimes a single component needs a value the system does not have. Two options:
 
-- **Local CSS variable.** Define `--feed-date-column` inside the component's own CSS file. The PostFeed already does this for its layout columns.
+- **Local CSS variable.** Define `--feed-date-column` inside the component's scoped style block. The PostFeed already does this for its layout columns.
 - **New token.** If more than one component would use it, add a new token to `tokens.css` and use it everywhere.
 
 Prefer local variables for one-off layout values. Prefer new tokens for anything that touches color, spacing, type, or motion.

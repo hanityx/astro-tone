@@ -61,7 +61,7 @@ const { title = 'Note' } = Astro.props;
 </aside>
 ```
 
-Its style lives in `src/styles/components/figure-note.css` and uses the same tokens as the rest of the theme. If you change `--color-blue` or `--label-tertiary`, the note follows.
+Its style lives with the `FigureNote.astro` component and uses the same tokens as the rest of the theme. If you change `--color-blue` or `--label-tertiary`, the note follows.
 
 ## Build your own
 
@@ -86,15 +86,28 @@ If a component needs state or behavior, it usually belongs in a page route, not 
 
 Astro components imported into MDX can live anywhere under `src/components/`. The starter keeps prose-specific components there too. `FigureNote.astro` is one.
 
-Component CSS lives in `src/styles/components/`. Import it from the top of the `.astro` file:
+Component-owned CSS can live in the same `.astro` file as a scoped `<style>` block:
 
 ```astro
 ---
-import '../styles/components/figure-note.css';
+const { title = 'Note' } = Astro.props;
 ---
+
+<aside class="figure-note">
+  <p class="figure-note__label">{title}</p>
+  <div class="figure-note__body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .figure-note {
+    border-left: 2px solid var(--color-blue);
+  }
+</style>
 ```
 
-Astro hoists the import and includes the CSS once, no matter how many posts use the component.
+Astro scopes the style to the component output, so the note can carry its own presentation without adding a global selector.
 
 ## Keep the source readable
 
