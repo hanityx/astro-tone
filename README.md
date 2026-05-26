@@ -42,7 +42,7 @@ Additional local measurements:
 - Cumulative Layout Shift: `0` on all measured pages
 - Total Blocking Time: `0 ms` on all measured pages
 - Static output: 9 pages in the current sample set
-- Pagefind index: 4 pages, 829 words
+- Pagefind index: 4 pages, 828 words
 
 Reproduce locally:
 

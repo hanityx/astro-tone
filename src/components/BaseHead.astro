@@ -25,11 +25,13 @@ interface Props {
   updatedDate?: string;
   /** Robots meta content. Defaults to public indexing. */
   robots?: string;
+  /** Canonical URL override for special routes such as 404.html. */
+  canonicalUrl?: string;
+  /** Social URL override for special routes such as 404.html. */
+  pageUrl?: string;
   /** Open Graph locale override for localized routes. */
   locale?: string;
 }
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
   title,
@@ -40,9 +42,14 @@ const {
   pubDate,
   updatedDate,
   robots = 'index, follow',
+  canonicalUrl,
+  pageUrl,
   locale,
 } = Astro.props;
 
+const canonicalURL = canonicalUrl
+  ? new URL(canonicalUrl, Astro.site)
+  : new URL(Astro.url.pathname, Astro.site);
 const ogLocale = locale ?? SITE_LOCALE;
 const documentTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
 const fallbackOgImageUrl = config.site.defaultOgImage;
@@ -58,7 +65,7 @@ const siteHref = new URL(withBase('/'), Astro.site).toString();
 const searchHref = new URL(withBase('/search'), Astro.site).toString();
 const rssHref = new URL(withBase('/rss.xml'), Astro.site).toString();
 const sitemapHref = new URL(withBase('/sitemap-index.xml'), Astro.site).toString();
-const pageUrl = Astro.url.toString();
+const pageHref = pageUrl ? new URL(pageUrl, Astro.site).toString() : Astro.url.toString();
 const ogImageHref = ogImage?.toString();
 
 // WebSite JSON-LD for website pages only.
@@ -137,7 +144,7 @@ const websiteJsonLd =
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
-<meta property="og:url" content={pageUrl} />
+<meta property="og:url" content={pageHref} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 {ogImageHref && <meta property="og:image" content={ogImageHref} />}
@@ -156,7 +163,7 @@ const websiteJsonLd =
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content={pageUrl} />
+<meta name="twitter:url" content={pageHref} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 {ogImageHref && <meta name="twitter:image" content={ogImageHref} />}
