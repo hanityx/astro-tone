@@ -10,6 +10,15 @@ Pagefind search, RSS, sitemap output, and a minimal writing surface.
 
 ![Tone responsive preview](assets/demo/astro-tone-showcase-1600x900.png)
 
+## Command Palette
+
+Open quick post search with `Cmd`/`Ctrl` + `K`.
+
+<p>
+  <img src="assets/demo/command-palette-light-1600x900.png" alt="Tone command palette in light mode" width="49%" />
+  <img src="assets/demo/command-palette-dark-1600x900.png" alt="Tone command palette in dark mode" width="49%" />
+</p>
+
 ## Features
 
 - Astro 6 static site
