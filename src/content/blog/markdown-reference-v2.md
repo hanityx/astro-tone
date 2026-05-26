@@ -147,6 +147,9 @@ Reference images from `src/assets/` with a relative path. Astro processes them a
 _Optional caption goes here._
 ```
 
+![Description for screen readers](../../assets/tone-sample-blue-architecture.jpg)
+_Optional caption goes here._
+
 Click an image in a rendered post to open the lightbox. Text in `_italics_` immediately after the image is treated as the caption.
 
 ## Callouts

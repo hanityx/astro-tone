@@ -1,5 +1,4 @@
 ---
-import '../styles/components/post-feed.css';
 import type { CollectionEntry } from 'astro:content';
 import config from '../../astro-theme-config';
 import { getUiText } from '../ui';
@@ -197,3 +196,472 @@ const Heading = headingLevel;
 
   onReady(mountPostFeeds);
 </script>
+
+<style>
+.post-feed {
+  --feed-date-column: 7.375rem;
+  --feed-control-height: 2rem;
+  --feed-more-height: 2.5rem;
+  --feed-hover-shift: 0.125rem;
+
+  display: grid;
+  gap: var(--space-6);
+}
+
+.feed-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-5);
+  align-items: end;
+  border-bottom: 1px solid var(--separator);
+}
+
+.feed-filter-rail {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  width: min(100%, 38rem);
+  min-width: 0;
+}
+
+.feed-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-5);
+  align-items: flex-start;
+  min-width: 0;
+  padding-right: var(--space-8);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: var(--space-1) var(--space-8);
+  scrollbar-width: none;
+  user-select: none;
+  mask-image: linear-gradient(90deg, #000 calc(100% - 1.75rem), transparent);
+}
+
+.feed-filters.is-dragging {
+  cursor: grabbing;
+}
+
+.feed-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.feed-filter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--feed-control-height);
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 var(--space-3);
+  background: transparent;
+  color: var(--label-tertiary);
+  font: inherit;
+  font-size: var(--text-footnote);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.feed-filter::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.feed-filter:hover,
+.feed-filter.is-active {
+  color: var(--label-primary);
+}
+
+.feed-filter.is-active::after {
+  transform: scaleX(1);
+}
+
+.feed-filter-count {
+  color: var(--label-tertiary);
+  font-size: var(--text-caption-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.feed-filter-scroll {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: var(--space-3);
+  place-items: center;
+  width: 1.875rem;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--bg-primary) 86%, transparent);
+  color: var(--label-secondary);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.feed-filter-scroll:hover {
+  color: var(--label-primary);
+}
+
+.feed-filter-scroll:disabled {
+  cursor: default;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.feed-filter-scroll svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feed-filter-scroll-prev {
+  left: 0;
+}
+
+.feed-filter-scroll-next {
+  right: 0;
+}
+
+.feed-filter-rail.has-filter-overflow:not(.is-at-start) .feed-filters {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 1.75rem,
+    #000 calc(100% - 1.75rem),
+    transparent
+  );
+}
+
+.feed-filter-rail.has-filter-overflow.is-at-end .feed-filters {
+  mask-image: linear-gradient(90deg, transparent, #000 1.75rem);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .feed-filter-scroll {
+    display: grid;
+  }
+
+  .feed-filters {
+    cursor: grab;
+  }
+
+  .feed-filter-rail:hover .feed-filter-scroll:not(:disabled),
+  .feed-filter-rail:focus-within .feed-filter-scroll:not(:disabled) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.feed-search {
+  --feed-search-mark-height: 1.25rem;
+  --feed-search-inline-padding: 0.65rem;
+
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-self: end;
+  box-sizing: border-box;
+  width: 3rem;
+  height: calc(var(--feed-control-height) + var(--space-3));
+  min-width: 0;
+  padding-left: var(--feed-search-inline-padding);
+  padding-right: var(--feed-search-inline-padding);
+  color: var(--label-tertiary);
+  font-size: var(--text-footnote);
+  overflow: hidden;
+  transition:
+    width 180ms var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.feed-search::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: var(--feed-search-mark-height);
+  border-radius: var(--radius-full);
+  background: var(--separator);
+  pointer-events: none;
+  transform: translateY(-50%) scaleY(0);
+  transform-origin: center;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.feed-search:focus-within {
+  width: min(13rem, 34vw);
+  color: var(--label-primary);
+}
+
+.feed-search.has-query {
+  width: min(13rem, 34vw);
+}
+
+.feed-search:focus-within::after,
+.feed-search.has-query::after {
+  transform: translateY(-50%) scaleY(1);
+}
+
+.feed-search-icon {
+  position: absolute;
+  top: 50%;
+  left: calc(100% - var(--feed-search-inline-padding) - 1em);
+  display: inline-grid;
+  place-items: center;
+  width: 1em;
+  height: 1em;
+  color: currentColor;
+  font-size: inherit;
+  line-height: 1;
+  transform: translateY(-50%);
+  transition: left 180ms var(--ease-out);
+}
+
+.feed-search:focus-within .feed-search-icon,
+.feed-search.has-query .feed-search-icon {
+  left: var(--feed-search-inline-padding);
+}
+
+.feed-search-icon svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.875;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feed-search-input {
+  width: 100%;
+  min-width: 0;
+  height: var(--feed-control-height);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--label-primary);
+  font: inherit;
+  font-size: inherit;
+  font-weight: var(--weight-semibold);
+  outline: none;
+  padding: 0 0 0 calc(1em + var(--space-2));
+  opacity: 1;
+  transition: opacity 70ms var(--ease-out) 120ms;
+}
+
+.feed-search:not(:focus-within, .has-query) .feed-search-input {
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 50ms;
+  transition-delay: 0ms;
+}
+
+.feed-search-input::placeholder {
+  color: transparent;
+}
+
+.feed-search-input::-webkit-search-cancel-button {
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-left: var(--space-2);
+  background: var(--label-primary);
+  cursor: pointer;
+  opacity: 0.72;
+  -webkit-appearance: none;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.22 3.28 8 7.06l3.78-3.78.94.94L8.94 8l3.78 3.78-.94.94L8 8.94l-3.78 3.78-.94-.94L7.06 8 3.28 4.22l.94-.94Z'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+.feed-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feed-item {
+  border-bottom: 1px solid var(--fill-tertiary);
+}
+
+.feed-item[hidden] {
+  display: none;
+}
+
+.feed-link {
+  display: grid;
+  grid-template-columns: var(--feed-date-column) minmax(0, 1fr) auto;
+  gap: var(--space-5);
+  align-items: baseline;
+  padding: var(--space-5) 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.feed-link:hover {
+  opacity: 1;
+}
+
+.feed-date {
+  color: var(--label-tertiary);
+  font-size: var(--text-footnote);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.feed-body {
+  min-width: 0;
+}
+
+.feed-title {
+  margin: 0;
+  color: var(--label-primary);
+  font-size: var(--text-title-3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.feed-link:hover .feed-title {
+  color: var(--color-blue);
+}
+
+.feed-desc {
+  max-width: 62ch;
+  margin: var(--space-2) 0 0;
+  color: var(--label-secondary);
+  font-size: var(--text-callout);
+  line-height: var(--leading-normal);
+}
+
+.feed-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.feed-category {
+  color: var(--color-blue);
+  font-size: var(--text-caption-2);
+  font-weight: var(--weight-semibold);
+}
+
+.feed-arrow {
+  color: var(--label-quaternary);
+  font-size: var(--text-callout);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.feed-link:hover .feed-arrow {
+  color: var(--color-blue);
+  transform: translate(var(--feed-hover-shift), calc(var(--feed-hover-shift) * -1));
+}
+
+.feed-more {
+  justify-self: center;
+  height: var(--feed-more-height);
+  padding: 0 var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--label-primary) 12%, transparent);
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+  color: var(--label-secondary);
+  font: inherit;
+  font-size: var(--text-footnote);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+}
+
+.feed-more:hover {
+  color: var(--color-blue);
+  border-color: color-mix(in srgb, var(--color-blue) 32%, transparent);
+}
+
+.feed-more[hidden],
+.feed-empty[hidden] {
+  display: none;
+}
+
+.feed-empty {
+  margin: 0;
+  color: var(--label-tertiary);
+  font-size: var(--text-callout);
+}
+
+.feed-sentinel {
+  height: 1px;
+}
+
+@media (max-width: 42.5rem) {
+  .feed-controls {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-3);
+  }
+
+  .feed-search {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .feed-search:focus-within,
+  .feed-search.has-query {
+    width: min(10.5rem, 42vw);
+  }
+
+  .feed-filter-rail {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  .feed-filter-scroll {
+    display: none;
+  }
+
+  .feed-link {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-3);
+    padding: var(--space-5) 0;
+  }
+
+  .feed-date {
+    grid-column: 1 / -1;
+  }
+
+  .feed-title {
+    font-size: var(--text-headline);
+  }
+
+  .feed-desc {
+    font-size: var(--text-footnote);
+  }
+}
+</style>

@@ -1,5 +1,4 @@
 ---
-import '../styles/components/comments.css';
 import config from '../../astro-theme-config';
 import { withBase, withoutBase } from '../utils/paths';
 
@@ -60,3 +59,36 @@ const giscusMapping = giscus.mapping === 'pathname' ? 'specific' : giscus.mappin
 
   mountGiscusComments();
 </script>
+
+<style>
+.comments-section {
+  max-width: var(--max-width-content);
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(60, 60, 67, 0.08);
+}
+
+.comments-label {
+  margin: 0 0 var(--space-4);
+  color: var(--label-tertiary);
+  font-size: var(--text-caption-1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.giscus {
+  --giscus-unmeasured-height: min(104rem, 220vh);
+
+  min-height: 80px;
+}
+
+.giscus :global(iframe.giscus-frame) {
+  display: block;
+  width: 100%;
+}
+
+.giscus:not(.is-resized) :global(iframe.giscus-frame) {
+  min-height: var(--giscus-unmeasured-height);
+}
+</style>
