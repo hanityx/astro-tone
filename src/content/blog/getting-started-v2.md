@@ -4,6 +4,7 @@ description: 'Clone, edit one config file, write one real post, deploy. The shor
 pubDate: '2026-04-15'
 category: 'Getting Started'
 heroImage: '../../assets/tone-sample-ai-water.jpg'
+homeFeatured: true
 ---
 
 The starter is a small Astro site. By the end of this post you will have your name on the home page, one real post, and a deploy that points to your domain.
@@ -101,6 +102,10 @@ Required: `title`, `description`, `pubDate`. Everything else is optional.
 - `draft: true` keeps the post out of the build, the RSS feed, and the search index.
 - `category` powers the filter row on `/blog`. Pick from `config.content.categoryOrder` or add a new one.
 - `heroImage` is a relative path to a file inside `src/assets/`. It feeds cards, social metadata, and structured data; place the image in the Markdown body too when the post should show it inline.
+- `homeHeroOrder: 1` pins a post into one of the two compact links at the top of the home page. Lower numbers appear first; unpinned posts fill any empty slots by publish date.
+- `homeFeatured: true` pins one post to the large feature card on the home page.
+- `homeOrder: 1` pins a post into the home page grid. Lower numbers appear first; unpinned posts fill any empty slots by publish date.
+- `focusEffect: 'scroll-dark'` enables the optional scroll dark effect for that post. It turns on after the reader passes roughly the first 20% of the article body and restores the previous theme near the top. The trigger point is set by the theme; it is not section-specific.
 
 ## Replace the samples
 

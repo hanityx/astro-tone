@@ -16,6 +16,9 @@ const blog = defineCollection({
       heroImage: z.optional(image()),
       focusEffect: z.literal('scroll-dark').optional(),
       category: z.string().optional(),
+      homeFeatured: z.boolean().default(false),
+      homeHeroOrder: z.number().int().positive().optional(),
+      homeOrder: z.number().int().positive().optional(),
       draft: z.boolean().default(false),
     }),
 });
