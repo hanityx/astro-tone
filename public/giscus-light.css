@@ -165,6 +165,23 @@ textarea,
   border: 0 !important;
 }
 
+.gsc-comment-box-preview {
+  min-height: 84px !important;
+  padding: 10px 12px !important;
+  color: #111111 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+.gsc-comment-box-preview:not(:has(*)) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: rgba(24, 31, 36, 0.42) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
 .gsc-reply-box .gsc-comment-box-write,
 .gsc-reply-box .gsc-comment-box-preview {
   border: 1px solid rgba(60, 60, 67, 0.12) !important;
