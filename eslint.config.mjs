@@ -7,9 +7,10 @@ export default [
   ...tseslint.configs.recommended,
   ...astroPlugin.configs.recommended,
   {
-    files: ['*.mjs'],
+    files: ['*.mjs', 'src/**/*.js'],
     languageOptions: {
       globals: {
+        Response: 'readonly',
         URL: 'readonly',
       },
     },

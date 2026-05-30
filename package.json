@@ -35,7 +35,7 @@
     "astro": "astro",
     "check": "astro check",
     "format": "prettier --write \"src/**/*.{astro,ts,css,md,mdx}\"",
-    "lint": "eslint \"src/**/*.{ts,astro}\" \"*.mjs\"",
+    "lint": "eslint \"src/**/*.{js,ts,astro}\" \"*.mjs\"",
     "lint:css": "stylelint \"src/**/*.{css,astro}\""
   },
   "dependencies": {
