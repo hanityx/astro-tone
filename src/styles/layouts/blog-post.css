@@ -147,7 +147,7 @@
   --toc-rail-duration-fast: var(--duration-fast);
   --toc-rail-ease-out: var(--ease-out);
   --toc-rail-left: calc(
-    50vw - var(--max-width-wide) / 2 + var(--space-6) + var(--max-width-content) + var(--space-12)
+    50vw - var(--max-width-wide) / 2 + var(--space-6) + var(--max-width-content) + var(--space-8)
   );
   --toc-rail-right: auto;
   --toc-rail-top: max(calc(var(--nav-height, 52px) + var(--space-16)), 24vh);

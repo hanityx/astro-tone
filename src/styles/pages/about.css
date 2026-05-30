@@ -4,6 +4,11 @@
   padding: var(--space-20) var(--space-6) var(--space-24);
 }
 
+.about-hero,
+.about-section {
+  max-width: var(--max-width-content);
+}
+
 .about-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(16rem, 18rem);
