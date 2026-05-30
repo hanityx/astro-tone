@@ -3,7 +3,7 @@
   background: transparent;
   border: none;
   max-width: min(92vw, 1200px);
-  max-height: 94vh;
+  max-height: 94dvh;
   border-radius: var(--radius-xl);
   overflow: visible;
 }
@@ -64,7 +64,7 @@
 .lightbox-img {
   display: block;
   max-width: min(90vw, 1160px);
-  max-height: 86vh;
+  max-height: 86dvh;
   border-radius: var(--radius-lg);
   object-fit: contain;
   border: none !important;
