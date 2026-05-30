@@ -4,6 +4,8 @@ description: 'Color, spacing, and type for the whole theme live in one tokens fi
 pubDate: '2026-03-20'
 category: 'Design'
 heroImage: '../../assets/tone-sample-blue-architecture.jpg'
+focusEffect: 'scroll-dark'
+homeOrder: 1
 ---
 
 If you want a different look for your site, start in one file:
@@ -21,6 +23,10 @@ Find `--color-blue` near the top. There are three copies:
 3. Forced dark via `[data-theme='dark']`
 
 Edit all three. The starter uses the same variable name across modes so components do not need to know which mode they are in.
+
+## Scroll dark turns on here
+
+This sample post has the optional scroll dark effect enabled. Keep scrolling through this color example and the page will switch to dark mode. Add or remove `focusEffect: 'scroll-dark'` in a post's frontmatter to turn it on or off for that post; the trigger point is theme-defined, not section-specific.
 
 ```css
 :root {

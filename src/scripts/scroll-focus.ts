@@ -18,27 +18,43 @@ function initScrollDark(prose: HTMLElement) {
   }
 
   let darkActive = false;
-  const enterAt = 0.1;
-  const exitAt = 0.065;
+  let userThemeOverride = false;
+  let effectThemeWrites = 0;
+  const enterAt = 0.2;
+  const exitAt = 0.13;
   const hasUserChangedTheme = () => {
+    if (userThemeOverride) return true;
     try {
       return localStorage.getItem('theme') !== storedTheme;
     } catch {
       return false;
     }
   };
+  const setThemeFromEffect = (theme: string) => {
+    effectThemeWrites += 1;
+    root.setAttribute('data-theme', theme);
+  };
   const restoreTheme = () => {
     if (hasUserChangedTheme()) return;
     if (initialTheme === 'light' || initialTheme === 'dark') {
-      root.setAttribute('data-theme', initialTheme);
+      setThemeFromEffect(initialTheme);
       return;
     }
     if (storedTheme === 'light' || storedTheme === 'dark') {
-      root.setAttribute('data-theme', storedTheme);
+      setThemeFromEffect(storedTheme);
       return;
     }
-    root.setAttribute('data-theme', userPrefersDark ? 'dark' : 'light');
+    setThemeFromEffect(userPrefersDark ? 'dark' : 'light');
   };
+  const observer = new MutationObserver(() => {
+    if (effectThemeWrites > 0) {
+      effectThemeWrites -= 1;
+      return;
+    }
+    userThemeOverride = true;
+    darkActive = false;
+  });
+  observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
   function update() {
     if (hasUserChangedTheme()) {
@@ -55,7 +71,7 @@ function initScrollDark(prose: HTMLElement) {
 
     if (pct >= enterAt && root.getAttribute('data-theme') !== 'dark') {
       darkActive = true;
-      root.setAttribute('data-theme', 'dark');
+      setThemeFromEffect('dark');
     } else if (pct <= exitAt && darkActive) {
       darkActive = false;
       restoreTheme();

@@ -12,12 +12,28 @@ const tr = getUiText();
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 9);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const [featured, ...rest] = posts;
-const recentPosts = posts.slice(0, 2);
-const gridPosts = rest.slice(0, 3);
+const featured = posts.find((post) => post.data.homeFeatured) ?? posts[0];
+const pinnedHeroPosts = posts
+  .filter((post) => post.data.homeHeroOrder)
+  .sort((a, b) => {
+    const orderDelta = (a.data.homeHeroOrder ?? 0) - (b.data.homeHeroOrder ?? 0);
+    if (orderDelta !== 0) return orderDelta;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
+const fallbackHeroPosts = posts.filter((post) => !post.data.homeHeroOrder);
+const heroPosts = [...pinnedHeroPosts, ...fallbackHeroPosts].slice(0, 2);
+const gridCandidates = posts.filter((post) => post.id !== featured?.id);
+const pinnedGridPosts = gridCandidates
+  .filter((post) => post.data.homeOrder)
+  .sort((a, b) => {
+    const orderDelta = (a.data.homeOrder ?? 0) - (b.data.homeOrder ?? 0);
+    if (orderDelta !== 0) return orderDelta;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
+const fallbackGridPosts = gridCandidates.filter((post) => !post.data.homeOrder);
+const gridPosts = [...pinnedGridPosts, ...fallbackGridPosts].slice(0, 3);
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -37,10 +53,10 @@ const gridPosts = rest.slice(0, 3);
       <div class="hero-divider" aria-hidden="true"></div>
 
       {
-        recentPosts.length > 0 && (
-          <nav class="hero-recent" aria-label="Recent posts">
+        heroPosts.length > 0 && (
+          <nav class="hero-recent" aria-label="Selected posts">
             <div class="hero-recent-list">
-              {recentPosts.map((post) => (
+              {heroPosts.map((post) => (
                 <a href={withBase(`/blog/${post.id}/`)} class="hero-recent-item">
                   <span class="hero-recent-main">
                     <span class="hero-recent-title">{post.data.title}</span>
