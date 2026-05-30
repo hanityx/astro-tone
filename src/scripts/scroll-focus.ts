@@ -18,8 +18,8 @@ function initScrollDark(prose: HTMLElement) {
   }
 
   let darkActive = false;
-  const enterAt = 0.1;
-  const exitAt = 0.065;
+  const enterAt = 0.2;
+  const exitAt = 0.13;
   const hasUserChangedTheme = () => {
     try {
       return localStorage.getItem('theme') !== storedTheme;

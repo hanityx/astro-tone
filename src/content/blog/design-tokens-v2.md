@@ -4,6 +4,8 @@ description: 'Color, spacing, and type for the whole theme live in one tokens fi
 pubDate: '2026-03-20'
 category: 'Design'
 heroImage: '../../assets/tone-sample-blue-architecture.jpg'
+focusEffect: 'scroll-dark'
+homeOrder: 1
 ---
 
 If you want a different look for your site, start in one file:
@@ -11,6 +13,8 @@ If you want a different look for your site, start in one file:
 `src/styles/tokens.css`
 
 The core colors, spacing steps, and type scale live there. Components and pages read those variables first, while specialized surfaces such as code highlighting keep a small local palette. Change the core variables and most of the site follows.
+
+This sample post has the optional scroll dark effect enabled. After the reader passes roughly the first 20% of the article body, the page switches to dark mode. Add or remove `focusEffect: 'scroll-dark'` in a post's frontmatter to turn it on or off for that post; the trigger point is theme-defined, not section-specific.
 
 ## Change the accent color
 

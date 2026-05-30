@@ -4,6 +4,8 @@ description: 'A short reference for the prose elements the theme styles. Heading
 pubDate: '2026-02-01'
 category: 'Markdown'
 heroImage: '../../assets/tone-sample-glass-building.jpg'
+homeHeroOrder: 2
+homeOrder: 3
 ---
 
 Use this post as a cheat sheet for the prose surface. Open it in two windows: source on one side, rendered post on the other.
