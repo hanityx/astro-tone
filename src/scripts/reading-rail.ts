@@ -10,6 +10,8 @@ export function initReadingRail() {
   const prose = document.querySelector<HTMLElement>('#prose-content');
   if (!prose) return;
 
+  const activeOffset = Math.round(window.innerHeight * 0.5);
+
   rail = mountTocRail({
     content: prose,
     headings: '#prose-content h2[id], #prose-content h3[id]',
@@ -17,7 +19,7 @@ export function initReadingRail() {
     ariaLabel: 'Post outline',
     progressMode: 'content',
     activeBoundary: 'viewport-end',
-    activeOffset: 120,
+    activeOffset,
     edge: {
       afterBoundary: 'viewport-end',
       afterOffset: 120,
