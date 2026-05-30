@@ -15,12 +15,27 @@ export function mountImageLightbox() {
     return;
   }
 
+  let previousFocus: Element | null = null;
+
+  const restorePage = () => {
+    document.body.style.overflow = '';
+    if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
+    previousFocus = null;
+  };
+
+  const closeLightbox = () => {
+    if (dialog.open) dialog.close();
+  };
+
   const openLightbox = (src: string, alt: string, caption: string) => {
+    previousFocus = document.activeElement;
     lightboxImg.src = src;
     lightboxImg.alt = alt;
     lightboxCap.textContent = caption;
     lightboxCap.hidden = !caption;
     dialog.showModal();
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus({ preventScroll: true });
   };
 
   document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
@@ -50,8 +65,14 @@ export function mountImageLightbox() {
     });
   });
 
-  closeBtn.addEventListener('click', () => dialog.close());
+  closeBtn.addEventListener('click', closeLightbox);
   dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
+    if (event.target === dialog) closeLightbox();
   });
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab') return;
+    event.preventDefault();
+    closeBtn.focus({ preventScroll: true });
+  });
+  dialog.addEventListener('close', restorePage);
 }
