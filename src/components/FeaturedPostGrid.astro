@@ -56,7 +56,7 @@ const imagePlaceholderStyle = (src: string | undefined) =>
               widths={[320, 480, 700, 960, 1280, 1600]}
               sizes={
                 index > 0
-                  ? '(max-width: 359px) calc(100vw - 32px), (max-width: 600px) calc((100vw - 44px) / 2), (max-width: 900px) 32rem, 45vw'
+                  ? '(max-width: 339px) calc(100vw - 32px), (max-width: 600px) calc((100vw - 44px) / 2), (max-width: 900px) 32rem, 45vw'
                   : '(max-width: 600px) calc(100vw - 32px), (max-width: 900px) 32rem, 45vw'
               }
               quality={88}
@@ -439,11 +439,11 @@ const imagePlaceholderStyle = (src: string | undefined) =>
 
   .featured-post-grid--home,
   .featured-post-grid--related {
-    --featured-grid-gap: 1px;
+    --featured-grid-gap: 6px;
     --featured-slot-1-title: clamp(1.14rem, 5vw, 1.36rem);
 
     grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-    grid-template-rows: repeat(2, minmax(0, clamp(8.8rem, 31vw, 10.2rem)));
+    grid-template-rows: repeat(2, minmax(0, clamp(9.2rem, 33vw, 10.8rem)));
     align-items: stretch;
     gap: var(--featured-grid-gap);
   }
@@ -502,18 +502,18 @@ const imagePlaceholderStyle = (src: string | undefined) =>
 
   .featured-post-grid--home .featured-post-card--slot-2 .featured-post-card-date,
   .featured-post-grid--home .featured-post-card--slot-3 .featured-post-card-date {
-    font-size: 0.68rem;
+    font-size: 0.63rem;
   }
 
   .featured-post-grid--home .featured-post-card--slot-2 .featured-post-card-title,
   .featured-post-grid--home .featured-post-card--slot-3 .featured-post-card-title {
     max-width: 13ch;
-    font-size: clamp(0.88rem, 3.8vw, 0.98rem);
+    font-size: clamp(0.82rem, 3.45vw, 0.92rem);
     line-height: 1.02;
   }
 }
 
-@media (max-width: 359px) {
+@media (max-width: 339px) {
   .featured-post-grid--home {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -566,11 +566,11 @@ const imagePlaceholderStyle = (src: string | undefined) =>
 
 @media (max-width: 600px) {
   .featured-post-grid--related {
-    --featured-grid-gap: 1px;
+    --featured-grid-gap: 6px;
     --featured-slot-1-title: clamp(1.14rem, 5vw, 1.36rem);
 
     grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-    grid-template-rows: repeat(2, minmax(0, clamp(8.8rem, 31vw, 10.2rem)));
+    grid-template-rows: repeat(2, minmax(0, clamp(9.2rem, 33vw, 10.8rem)));
     align-items: stretch;
     gap: var(--featured-grid-gap);
   }
@@ -603,18 +603,18 @@ const imagePlaceholderStyle = (src: string | undefined) =>
 
   .featured-post-grid--related .featured-post-card--slot-2 .featured-post-card-date,
   .featured-post-grid--related .featured-post-card--slot-3 .featured-post-card-date {
-    font-size: 0.68rem;
+    font-size: 0.63rem;
   }
 
   .featured-post-grid--related .featured-post-card--slot-2 .featured-post-card-title,
   .featured-post-grid--related .featured-post-card--slot-3 .featured-post-card-title {
     max-width: 13ch;
-    font-size: clamp(0.88rem, 3.8vw, 0.98rem);
+    font-size: clamp(0.82rem, 3.45vw, 0.92rem);
     line-height: 1.02;
   }
 }
 
-@media (max-width: 359px) {
+@media (max-width: 339px) {
   .featured-post-grid--related {
     grid-template-columns: 1fr;
     grid-template-rows: auto;

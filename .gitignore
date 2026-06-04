@@ -33,3 +33,4 @@ playwright-report/
 local-docs/
 .codex/
 .playwright-mcp/
+.vercel
