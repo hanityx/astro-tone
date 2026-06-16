@@ -4,7 +4,7 @@ Minimal Astro blog starter with quiet defaults.
 
 <p>
   <a href="https://hanityx.github.io/astro-tone/">Live demo</a> ·
-  <a href="https://github.com/hanityx/astro-tone">Use this template</a>
+  <a href="https://github.com/new?template_name=astro-tone&template_owner=hanityx">Use this template</a>
 </p>
 
 ![Tone responsive preview](.github/assets/astro-tone-showcase-1600x900.png)
@@ -67,7 +67,7 @@ npx lighthouse http://127.0.0.1:4321/ --preset=desktop --output=json
 
 Requires Node.js 22.12.0 or newer.
 
-Use the template:
+Create with the Astro CLI:
 
 ```bash
 npm create astro@latest astro-tone -- --template hanityx/astro-tone
