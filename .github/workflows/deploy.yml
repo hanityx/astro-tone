@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 22.22.0
           cache: npm
       - uses: actions/configure-pages@v6
       - name: Configure Astro for GitHub Pages
