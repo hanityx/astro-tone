@@ -1,5 +1,6 @@
 // @ts-check
 
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import expressiveCode from 'astro-expressive-code';
@@ -39,17 +40,25 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
 
+  // Astro 7 defaults `compressHTML` to 'jsx'. The theme is authored against the
+  // previous HTML-aware whitespace handling, so keep that behavior explicitly.
+  compressHTML: true,
+
   markdown: {
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'append',
-          properties: { ariaHidden: true, tabIndex: -1, class: 'heading-anchor' },
-          content: { type: 'text', value: '#' },
-        },
+    // Astro 7 defaults to the Sätteri Markdown processor. The theme relies on
+    // rehype plugins, so opt back into the unified pipeline.
+    processor: unified({
+      rehypePlugins: [
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: 'append',
+            properties: { ariaHidden: true, tabIndex: -1, class: 'heading-anchor' },
+            content: { type: 'text', value: '#' },
+          },
+        ],
       ],
-    ],
+    }),
   },
 });
